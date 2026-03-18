@@ -1,0 +1,57 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  breadcrumb?: Array<{ label: string; href?: string }>;
+  eyebrow?: string;
+}
+
+const { title, subtitle, breadcrumb, eyebrow } = Astro.props;
+---
+
+<section class="relative py-20 lg:py-28 bg-bg-secondary overflow-hidden stripe-overlay">
+  <!-- Background accent -->
+  <div class="absolute inset-0 bg-gradient-to-r from-navy/30 to-transparent" aria-hidden="true"></div>
+  <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-blue-brand/80 via-blue-brand/20 to-transparent" aria-hidden="true"></div>
+  <div
+    class="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-transparent via-blue-brand/20 to-transparent"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8">
+
+    <!-- Breadcrumb -->
+    {breadcrumb && breadcrumb.length > 0 && (
+      <nav class="flex items-center gap-2 mb-6" aria-label="Breadcrumb">
+        <a href="/" class="text-text-subtle text-xs hover:text-text-muted transition-colors">Home</a>
+        {breadcrumb.map((item, i) => (
+          <>
+            <span class="text-text-subtle text-xs">/</span>
+            {item.href && i < breadcrumb.length - 1 ? (
+              <a href={item.href} class="text-text-subtle text-xs hover:text-text-muted transition-colors">{item.label}</a>
+            ) : (
+              <span class="text-text-muted text-xs">{item.label}</span>
+            )}
+          </>
+        ))}
+      </nav>
+    )}
+
+    {eyebrow && (
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-6 h-px bg-blue-brand"></div>
+        <span class="section-label">{eyebrow}</span>
+      </div>
+    )}
+
+    <h1 class="font-heading font-black text-5xl sm:text-6xl lg:text-7xl text-text-primary leading-[1.0] mb-4 max-w-3xl">
+      {title}
+    </h1>
+
+    {subtitle && (
+      <p class="text-text-muted text-lg max-w-2xl leading-relaxed mt-4">
+        {subtitle}
+      </p>
+    )}
+  </div>
+</section>

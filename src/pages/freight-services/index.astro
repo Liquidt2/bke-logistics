@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import QuoteSection from '../../components/QuoteSection.astro';
+
+const services = [
+  {
+    icon: '🚛',
+    title: 'Flatbed Transport',
+    subtitle: 'Open-Deck Freight Specialists',
+    href: '/freight-services/flatbed',
+    description: 'Our flatbed division handles the loads that demand skill — oversized machinery, structural steel, lumber packages, and heavy construction equipment. With 48\' and 53\' flatbeds, step decks, and RGN trailers in our network, we match the right equipment to your cargo.',
+    capabilities: [
+      'Lumber & building materials',
+      'Structural steel & beams',
+      'Agricultural & farm equipment',
+      'Industrial machinery',
+      'Construction materials',
+      'Oversized & over-dimensional loads',
+    ],
+    highlight: 'Best for: Heavy, oversized, or non-stackable freight',
+  },
+  {
+    icon: '📦',
+    title: 'Dry Van Freight',
+    subtitle: 'Enclosed Trailer Protection',
+    href: '/freight-services/dry-van',
+    description: 'When your cargo needs protection from weather, theft, and road conditions, our dry van fleet delivers. We move palletized goods, packaged consumer products, and general freight in fully enclosed trailers, ensuring your shipment arrives intact and on time.',
+    capabilities: [
+      'Palletized consumer goods',
+      'Packaged merchandise & retail',
+      'Food-grade non-refrigerated cargo',
+      'Electronics & packaged tech',
+      'Paper & printing products',
+      'General manufactured goods',
+    ],
+    highlight: 'Best for: Weather-sensitive, packaged, or high-value cargo',
+  },
+];
+---
+
+<BaseLayout
+  title="Freight Services"
+  description="BKE Logistics LLC offers flatbed and dry van freight services across 48 states. Professional transport for heavy, oversized, and general freight shipments."
+>
+  <PageHero
+    title="Freight Services"
+    subtitle="From structural steel on flatbeds to palletized consumer goods in dry vans, BKE Logistics has the equipment, experience, and network to move your freight with precision."
+    breadcrumb={[{ label: 'Freight Services' }]}
+    eyebrow="Transportation Solutions"
+  />
+
+  <!-- Overview -->
+  <section class="py-16 lg:py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-3xl">
+        <span class="section-label block mb-3">Our Approach</span>
+        <h2 class="font-heading font-bold text-3xl lg:text-4xl text-text-primary mb-5">
+          Freight Solutions Without Compromise
+        </h2>
+        <p class="text-text-muted leading-relaxed mb-4">
+          At BKE Logistics, we don't believe in a one-size-fits-all approach to freight. Every shipment is unique — different cargo, different origins, different deadlines. That's why we've built specialized capabilities in both flatbed and dry van transport, so we can recommend the right solution for your specific needs rather than forcing your freight into whatever's convenient for us.
+        </p>
+        <p class="text-text-muted leading-relaxed">
+          Our dispatch team works around the clock to coordinate pickups, monitor transit, and proactively communicate with shippers and receivers. When issues arise — and in trucking, they sometimes do — you'll know about it before it becomes your problem.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Cards -->
+  <section class="pb-20 lg:pb-28 bg-bg" aria-label="Service details">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {services.map(service => (
+          <div class="bg-bg-card border border-white/8 rounded-sm overflow-hidden hover:border-blue-brand/30 transition-all duration-300 group hover:shadow-blue-glow">
+            <div class="p-8 lg:p-10">
+              <div class="flex items-start justify-between mb-6">
+                <div>
+                  <div class="text-4xl mb-3">{service.icon}</div>
+                  <h2 class="font-heading font-bold text-3xl text-text-primary group-hover:text-blue-brand transition-colors">
+                    {service.title}
+                  </h2>
+                  <p class="text-blue-brand text-sm font-medium mt-1">{service.subtitle}</p>
+                </div>
+              </div>
+
+              <p class="text-text-muted text-sm leading-relaxed mb-8">
+                {service.description}
+              </p>
+
+              <div class="mb-8">
+                <h3 class="text-text-primary font-semibold text-xs uppercase tracking-wider mb-3">Cargo We Handle</h3>
+                <ul class="grid grid-cols-2 gap-y-2 gap-x-4">
+                  {service.capabilities.map(cap => (
+                    <li class="flex items-center gap-2 text-text-muted text-sm">
+                      <div class="w-1 h-1 rounded-full bg-blue-brand shrink-0"></div>
+                      {cap}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="p-3 bg-navy/40 border border-navy-light/20 rounded-sm mb-7">
+                <p class="text-text-muted text-xs font-medium">
+                  <span class="text-blue-brand">◆ </span>{service.highlight}
+                </p>
+              </div>
+
+              <a href={service.href} class="btn-primary w-full justify-center">
+                Learn More About {service.title}
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <QuoteSection />
+</BaseLayout>

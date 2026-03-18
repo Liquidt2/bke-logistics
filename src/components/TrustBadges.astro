@@ -1,0 +1,57 @@
+---
+const badges = [
+  {
+    icon: '🛡️',
+    label: 'FMCSA Certified',
+    desc: 'Federal Motor Carrier Safety Administration',
+  },
+  {
+    icon: '✅',
+    label: 'DOT Compliant',
+    desc: 'Department of Transportation Registered',
+  },
+  {
+    icon: '🔒',
+    label: 'Fully Insured',
+    desc: 'Comprehensive cargo & liability coverage',
+  },
+  {
+    icon: '⚡',
+    label: '24/7 Dispatch',
+    desc: 'Around-the-clock freight coordination',
+  },
+  {
+    icon: '📍',
+    label: '48-State Coverage',
+    desc: 'Nationwide lanes, coast to coast',
+  },
+  {
+    icon: '🔧',
+    label: 'Well-Maintained Fleet',
+    desc: 'Regular inspections & safety checks',
+  },
+];
+---
+
+<section class="py-16 lg:py-20 bg-bg border-y border-white/5" aria-label="Trust and compliance badges">
+  <div class="max-w-7xl mx-auto px-5 lg:px-8">
+    <div class="text-center mb-10">
+      <span class="section-label block mb-3">Why Choose BKE</span>
+      <h2 class="font-heading font-bold text-3xl lg:text-4xl text-text-primary">
+        Built on Compliance &amp; Reliability
+      </h2>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3 lg:gap-4">
+      {badges.map(badge => (
+        <div class="badge-trust group cursor-default">
+          <span class="text-lg" role="img" aria-hidden="true">{badge.icon}</span>
+          <div>
+            <div class="font-semibold text-text-primary text-sm">{badge.label}</div>
+            <div class="text-text-subtle text-[11px] mt-0.5 hidden sm:block">{badge.desc}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

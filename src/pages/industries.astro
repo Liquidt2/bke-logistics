@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteSection from '../components/QuoteSection.astro';
+
+const industries = [
+  {
+    icon: '🏭',
+    title: 'Manufacturing',
+    description: 'Production lines don\'t wait for late freight. BKE Logistics understands manufacturing\'s tight delivery windows and just-in-time requirements. We move raw materials to plants and finished goods to distribution centers on schedule, every time.',
+    freightTypes: ['Raw materials & components', 'Finished goods to DC', 'Heavy equipment transport', 'Steel & metal products'],
+    challenge: 'JIT delivery windows and production line continuity',
+  },
+  {
+    icon: '🏗️',
+    title: 'Construction',
+    description: 'Construction sites run on precision timing — materials must arrive when the crew is ready, not before, not after. Our flatbed capabilities are ideal for the oversized loads construction demands, from structural steel and precast concrete to roofing materials and heavy equipment.',
+    freightTypes: ['Structural steel & rebar', 'Precast concrete elements', 'Heavy construction equipment', 'Lumber & building materials'],
+    challenge: 'Jobsite deliveries with limited staging areas',
+  },
+  {
+    icon: '🌾',
+    title: 'Agriculture',
+    description: 'Agricultural equipment is large, expensive, and season-sensitive. Whether moving a combine during harvest prep, transporting grain bins to a new farm, or shipping irrigation equipment across the Plains, BKE\'s flatbed specialists handle farm freight with the care it demands.',
+    freightTypes: ['Tractors & combines', 'Irrigation equipment', 'Grain storage structures', 'Planting & harvesting equipment'],
+    challenge: 'Seasonal urgency and oversized equipment dimensions',
+  },
+  {
+    icon: '📦',
+    title: 'Retail & Consumer Goods',
+    description: 'From regional distribution centers to national retailers, BKE moves consumer goods with the consistency and reliability that retail logistics demands. Our dry van fleet handles packaged merchandise, household goods, and seasonal product movements with flexibility and speed.',
+    freightTypes: ['Packaged consumer goods', 'Seasonal merchandise', 'Household goods', 'Health & beauty products'],
+    challenge: 'Retailer routing guides and appointment scheduling',
+  },
+  {
+    icon: '🥩',
+    title: 'Food & Beverage',
+    description: 'Ambient food freight — dry goods, canned products, non-perishable items, and beverages — moves in our clean dry van fleet. We maintain food-grade standards and understand the documentation requirements that food shippers need, including bills of lading and chain of custody.',
+    freightTypes: ['Non-refrigerated dry goods', 'Beverages & bottled products', 'Canned & packaged foods', 'Food-grade packaging materials'],
+    challenge: 'Food safety compliance and clean equipment verification',
+  },
+  {
+    icon: '⚡',
+    title: 'Energy & Oil',
+    description: 'The energy sector requires heavy-duty transport for equipment and materials that push the boundaries of standard freight. From oil field machinery and pipeline components to renewable energy equipment like wind turbine sections, BKE\'s flatbed network handles energy freight coast to coast.',
+    freightTypes: ['Oilfield equipment & pipe', 'Generator sets & compressors', 'Renewable energy components', 'Drilling equipment & tanks'],
+    challenge: 'Remote delivery locations and permit-heavy oversized loads',
+  },
+];
+---
+
+<BaseLayout
+  title="Industries Served"
+  description="BKE Logistics LLC serves manufacturing, construction, agriculture, retail, food & beverage, and energy sectors with reliable flatbed and dry van freight solutions."
+>
+  <PageHero
+    title="Industries We Serve"
+    subtitle="Deep expertise across the sectors that keep America running. We understand the unique freight demands of your industry — not just the dimensions of the load."
+    breadcrumb={[{ label: 'Industries' }]}
+    eyebrow="Sector Expertise"
+  />
+
+  <!-- Intro -->
+  <section class="py-16 bg-bg">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-text-muted text-lg leading-relaxed">
+          Every industry has its own freight fingerprint — specific cargo types, unique delivery constraints, regulatory requirements, and seasonal pressures. BKE Logistics has spent years building experience across the sectors that matter most, so we can be more than just a carrier. We can be a strategic freight partner.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries Grid -->
+  <section class="pb-20 lg:pb-28 bg-bg" aria-label="Industries list">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {industries.map(industry => (
+          <div class="bg-bg-card border border-white/8 rounded-sm overflow-hidden hover:border-blue-brand/25 transition-all duration-300 group hover:shadow-card-hover">
+            <div class="p-7 lg:p-8">
+              <div class="flex items-start gap-5 mb-5">
+                <div class="w-14 h-14 bg-navy/50 border border-navy-light/20 rounded-sm flex items-center justify-center text-3xl shrink-0 group-hover:bg-blue-brand/10 group-hover:border-blue-brand/30 transition-all">
+                  {industry.icon}
+                </div>
+                <div>
+                  <h2 class="font-heading font-bold text-2xl text-text-primary group-hover:text-blue-brand transition-colors">
+                    {industry.title}
+                  </h2>
+                  <div class="flex items-center gap-2 mt-1">
+                    <div class="w-1 h-1 bg-blue-brand rounded-full"></div>
+                    <span class="text-text-subtle text-xs font-medium">{industry.challenge}</span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-text-muted text-sm leading-relaxed mb-5">
+                {industry.description}
+              </p>
+
+              <div>
+                <h3 class="text-text-subtle text-[10px] font-bold uppercase tracking-[0.15em] mb-3">Freight We Handle</h3>
+                <div class="flex flex-wrap gap-2">
+                  {industry.freightTypes.map(type => (
+                    <span class="px-3 py-1 bg-navy/40 border border-navy-light/20 rounded-sm text-text-muted text-xs font-medium">
+                      {type}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Don't see yours -->
+      <div class="mt-10 text-center">
+        <p class="text-text-muted text-sm">
+          Don't see your industry listed? We haul across many more sectors.{' '}
+          <a href="/contact" class="text-blue-brand hover:underline font-medium">Tell us about your freight needs.</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <QuoteSection
+    headline="Your Industry. Our Network."
+    subtext="Whatever sector you're in, BKE Logistics has the equipment, the capacity, and the expertise to handle your freight. Let's talk about your specific shipping needs."
+  />
+</BaseLayout>

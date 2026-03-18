@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#080D1A"/>
+  <rect x="2" y="2" width="28" height="28" rx="2" fill="#0D2B5C"/>
+  <!-- Diagonal stripe accent -->
+  <line x1="8" y1="2" x2="30" y2="24" stroke="#1769D4" stroke-width="2.5" opacity="0.4"/>
+  <line x1="2" y1="12" x2="20" y2="30" stroke="#1769D4" stroke-width="2.5" opacity="0.3"/>
+  <!-- BKE text -->
+  <text x="16" y="22" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="11" fill="#F8FAFC" text-anchor="middle" letter-spacing="-0.5">BKE</text>
+</svg>

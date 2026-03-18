@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import StatsBar from '../components/StatsBar.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import TrustBadges from '../components/TrustBadges.astro';
+import LanesMap from '../components/LanesMap.astro';
+import QuoteSection from '../components/QuoteSection.astro';
+
+const services = [
+  {
+    icon: '🚛',
+    title: 'Flatbed Transport',
+    description: 'Open-deck freight solutions for oversized, heavy, and specialty cargo. 48\' and 53\' flatbeds, step decks, and RGN trailers available for lumber, steel, machinery, and construction materials.',
+    href: '/freight-services/flatbed',
+  },
+  {
+    icon: '📦',
+    title: 'Dry Van Freight',
+    description: 'Enclosed trailer solutions protecting your cargo from the elements. Ideal for palletized goods, consumer products, packaged merchandise, and general freight requiring weather protection.',
+    href: '/freight-services/dry-van',
+  },
+  {
+    icon: '🏗️',
+    title: 'Full Truckload (FTL)',
+    description: 'Dedicated full truckload capacity for shippers who need the entire trailer. Direct routes, faster transit, and cost-effective pricing for high-volume freight needs.',
+    href: '/freight-services',
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'BKE Logistics has been our go-to carrier for steel coil shipments for over two years. Their flatbed team handles our complex loads with precision, and their communication is second to none. We never have to chase updates — they proactively keep us in the loop.',
+    name: 'Marcus T.',
+    company: 'Regional Steel Fabricator, Ohio',
+    rating: 5,
+  },
+  {
+    quote: 'We needed a reliable partner for our construction material runs from the Midwest to the Southeast. BKE delivered consistently on time, even during peak season when capacity was tight. Fair pricing, professional drivers, zero excuses.',
+    name: 'Sandra L.',
+    company: 'Construction Supply Co., Tennessee',
+    rating: 5,
+  },
+  {
+    quote: "Switched from a national broker to BKE Logistics and couldn't be happier. The direct communication with dispatch makes all the difference when you're managing tight delivery windows. Their team genuinely cares about getting the load there right.",
+    name: 'James R.',
+    company: 'Agricultural Equipment Dealer, Iowa',
+    rating: 5,
+  },
+];
+
+const industries = [
+  { name: 'Manufacturing', icon: '🏭' },
+  { name: 'Construction', icon: '🏗️' },
+  { name: 'Agriculture', icon: '🌾' },
+  { name: 'Retail & Consumer', icon: '📦' },
+  { name: 'Food & Beverage', icon: '🥩' },
+  { name: 'Energy & Oil', icon: '⚡' },
+];
+---
+
+<BaseLayout
+  title="Home"
+  description="BKE Logistics LLC — Premium flatbed and dry van freight solutions across 48 states. FMCSA certified, DOT compliant, 24/7 dispatch. Request a quote today."
+>
+  <!-- Hero -->
+  <Hero />
+
+  <!-- Stats Bar -->
+  <StatsBar />
+
+  <!-- Services Section -->
+  <section class="py-20 lg:py-28 bg-bg" aria-labelledby="services-heading">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+        <div>
+          <span class="section-label block mb-3">What We Move</span>
+          <h2 id="services-heading" class="font-heading font-bold text-4xl lg:text-5xl xl:text-6xl text-text-primary leading-tight">
+            Freight Services<br/>Built for Results
+          </h2>
+        </div>
+        <a href="/freight-services" class="btn-secondary shrink-0">View All Services</a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {services.map((service, i) => (
+          <ServiceCard
+            icon={service.icon}
+            title={service.title}
+            description={service.description}
+            href={service.href}
+            featured={i === 0}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries Teaser -->
+  <section class="py-16 lg:py-20 bg-bg-secondary border-y border-white/5" aria-labelledby="industries-heading">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10">
+        <div>
+          <span class="section-label block mb-3">Industries We Serve</span>
+          <h2 id="industries-heading" class="font-heading font-bold text-3xl lg:text-4xl text-text-primary">
+            Freight Solutions Across Every Sector
+          </h2>
+        </div>
+        <a href="/industries" class="btn-secondary shrink-0 self-start lg:self-auto">All Industries</a>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {industries.map(industry => (
+          <a href="/industries" class="group bg-bg-card border border-white/5 hover:border-blue-brand/30 rounded-sm p-4 flex flex-col items-center gap-2 text-center transition-all duration-200 hover:bg-navy/20">
+            <span class="text-2xl">{industry.icon}</span>
+            <span class="text-text-muted text-xs font-medium group-hover:text-text-primary transition-colors">{industry.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <TrustBadges />
+
+  <!-- Lanes Map -->
+  <LanesMap />
+
+  <!-- Testimonials -->
+  <section class="py-20 lg:py-28 bg-bg" aria-labelledby="testimonials-heading">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="section-label block mb-3">Client Testimonials</span>
+        <h2 id="testimonials-heading" class="font-heading font-bold text-4xl lg:text-5xl text-text-primary">
+          What Our Clients Say
+        </h2>
+        <p class="text-text-muted mt-3 max-w-xl mx-auto text-sm">
+          Long-term relationships built on reliable performance, transparent pricing, and genuine care for every shipment.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {testimonials.map(t => (
+          <div class="bg-bg-card border border-white/5 hover:border-blue-brand/20 rounded-sm p-7 transition-all duration-300 hover:shadow-blue-glow group">
+            <!-- Stars -->
+            <div class="flex gap-1 mb-5">
+              {Array.from({ length: t.rating }).map(() => (
+                <span class="text-yellow-400 text-sm">★</span>
+              ))}
+            </div>
+
+            <!-- Quote mark -->
+            <div class="font-heading font-black text-5xl text-blue-brand/20 leading-none mb-3 -mt-2">"</div>
+
+            <p class="text-text-muted text-sm leading-relaxed mb-6">
+              {t.quote}
+            </p>
+
+            <div class="pt-4 border-t border-white/5">
+              <div class="font-semibold text-text-primary text-sm">{t.name}</div>
+              <div class="text-text-subtle text-xs mt-0.5">{t.company}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote CTA -->
+  <QuoteSection />
+</BaseLayout>

@@ -1,0 +1,92 @@
+---
+interface Props {
+  headline?: string;
+  subheadline?: string;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+}
+
+const {
+  headline = 'Moving Freight.<br/>Building Trust.',
+  subheadline = 'BKE Logistics LLC delivers reliable flatbed and dry van freight solutions across 48 states — backed by 24/7 dispatch, real-time communication, and a commitment to on-time performance.',
+  primaryCta = { label: 'Request a Quote', href: '/request-quote' },
+  secondaryCta = { label: 'View Services', href: '/freight-services' },
+} = Astro.props;
+---
+
+<section class="relative min-h-[92vh] flex items-center overflow-hidden bg-bg stripe-overlay">
+  <!-- Background layers -->
+  <div class="absolute inset-0 bg-gradient-to-br from-navy-dark/60 via-bg to-bg z-0" aria-hidden="true"></div>
+
+  <!-- Diagonal accent bar -->
+  <div
+    class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-b from-navy/20 to-transparent"
+    style="clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Blue accent line -->
+  <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-blue-brand via-blue-brand/40 to-transparent" aria-hidden="true"></div>
+
+  <!-- Grid dot pattern -->
+  <div
+    class="absolute inset-0 opacity-[0.035]"
+    style="background-image: radial-gradient(circle, #1769D4 1px, transparent 1px); background-size: 36px 36px;"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 py-24 lg:py-32 w-full">
+    <div class="max-w-3xl">
+      <!-- Label -->
+      <div class="flex items-center gap-3 mb-8 animate-fade-up">
+        <div class="w-8 h-px bg-blue-brand"></div>
+        <span class="section-label">FMCSA Certified · DOT Compliant · 48 States</span>
+      </div>
+
+      <!-- Headline -->
+      <h1
+        class="font-heading font-black text-6xl sm:text-7xl lg:text-8xl xl:text-9xl text-text-primary leading-[0.95] mb-8 animate-fade-up-delay-1"
+        set:html={headline}
+      />
+
+      <!-- Subheadline -->
+      <p class="text-text-muted text-lg sm:text-xl leading-relaxed max-w-2xl mb-12 animate-fade-up-delay-2">
+        {subheadline}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 animate-fade-up-delay-3">
+        <a href={primaryCta.href} class="btn-primary text-base px-9 py-4">
+          {primaryCta.label}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+        <a href={secondaryCta.href} class="btn-secondary text-base px-9 py-4">
+          {secondaryCta.label}
+        </a>
+      </div>
+
+      <!-- Quick trust indicators -->
+      <div class="flex flex-wrap items-center gap-6 mt-14 pt-10 border-t border-white/8">
+        {[
+          { icon: '✓', text: 'No Hidden Fees' },
+          { icon: '✓', text: '24/7 Dispatch' },
+          { icon: '✓', text: 'Real-Time Updates' },
+          { icon: '✓', text: 'Fully Insured' },
+        ].map(item => (
+          <div class="flex items-center gap-2">
+            <span class="text-blue-brand text-sm font-bold">{item.icon}</span>
+            <span class="text-text-muted text-sm font-medium">{item.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40" aria-hidden="true">
+    <span class="text-text-muted text-[10px] tracking-[0.2em] uppercase">Scroll</span>
+    <div class="w-px h-8 bg-gradient-to-b from-text-muted to-transparent"></div>
+  </div>
+</section>

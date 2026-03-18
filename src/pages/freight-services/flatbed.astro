@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import QuoteSection from '../../components/QuoteSection.astro';
+
+const loadTypes = [
+  { icon: '🪵', title: 'Lumber & Timber', desc: 'Dimensional lumber, timber packages, plywood sheets, and engineered wood products for construction and manufacturing.' },
+  { icon: '⚙️', title: 'Steel & Metal', desc: 'Steel coils, I-beams, rebar bundles, pipe, plate, and structural steel for fabrication and construction projects.' },
+  { icon: '🏗️', title: 'Construction Materials', desc: 'Concrete barriers, precast sections, roofing materials, HVAC equipment, and building panels.' },
+  { icon: '🚜', title: 'Farm & Agricultural Equipment', desc: 'Tractors, combines, planting equipment, and other large agricultural machinery — running or non-running.' },
+  { icon: '🏭', title: 'Industrial Machinery', desc: 'Manufacturing equipment, generators, compressors, and heavy industrial machinery that can\'t be crated.' },
+  { icon: '📐', title: 'Oversized & Over-Dimensional', desc: 'Wide loads, tall loads, and extra-long cargo requiring special permitting and escort coordination.' },
+];
+
+const equipment = [
+  {
+    name: 'Standard Flatbed',
+    specs: ['48\' or 53\' length', 'Up to 48,000 lbs payload', '8\'6" max width (standard)', 'Common for lumber, steel, pallets'],
+  },
+  {
+    name: 'Step Deck (Drop Deck)',
+    specs: ['Up to 53\' usable length', 'Up to 48,000 lbs payload', 'Lower deck for taller cargo', 'Ideal for machinery over 8\'6"'],
+  },
+  {
+    name: 'Lowboy / RGN',
+    specs: ['20\'–53\' effective length', 'Up to 80,000 lbs standard', 'Removable gooseneck loading', 'Heavy equipment & tall machinery'],
+  },
+];
+
+const whyBKE = [
+  { title: 'Securement Expertise', desc: 'Our drivers know how to properly secure every type of flatbed cargo — chains, binders, straps, tarps, edge protectors. No shortcuts on load securement.' },
+  { title: 'Permit Coordination', desc: 'Oversize and overweight loads require state permits, sometimes route surveys and pilot cars. We handle the regulatory burden so you don\'t have to.' },
+  { title: 'Tarp Services Available', desc: 'Steel, machinery, and moisture-sensitive materials often require tarping. Our drivers carry and deploy tarps when your cargo demands it.' },
+  { title: 'Experienced Drivers', desc: 'Flatbed driving is a specialized skill. Our carrier network consists of experienced flatbed operators with proven records and clean safety ratings.' },
+];
+---
+
+<BaseLayout
+  title="Flatbed Transport"
+  description="BKE Logistics LLC flatbed freight services — 48\' and 53\' flatbeds, step decks, RGN trailers for steel, lumber, machinery, and oversized loads. 48-state coverage."
+>
+  <PageHero
+    title="Flatbed Transport"
+    subtitle="Open-deck freight solutions for the loads that demand expertise. From structural steel to heavy machinery, we have the equipment and the people to deliver."
+    breadcrumb={[
+      { label: 'Freight Services', href: '/freight-services' },
+      { label: 'Flatbed' },
+    ]}
+    eyebrow="Open-Deck Freight"
+  />
+
+  <!-- What is Flatbed -->
+  <section class="py-16 lg:py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div>
+          <span class="section-label block mb-3">About Flatbed Freight</span>
+          <h2 class="font-heading font-bold text-3xl lg:text-4xl text-text-primary mb-5">
+            What Is Flatbed Transport?
+          </h2>
+          <p class="text-text-muted leading-relaxed mb-4">
+            Flatbed transport uses open-deck trailers without walls or a roof, allowing cargo to be loaded from the top, sides, or rear using cranes, forklifts, or loading docks. This makes flatbeds the ideal — sometimes only — option for large, heavy, or awkwardly shaped freight that cannot fit inside an enclosed trailer.
+          </p>
+          <p class="text-text-muted leading-relaxed mb-6">
+            Unlike dry van freight, flatbed loads require specialized knowledge of load securement regulations (FMCSA 393), proper tiedown techniques, and in many cases, permits for oversized cargo. BKE Logistics' carrier network specializes in exactly these demands.
+          </p>
+          <div class="flex items-center gap-3 p-4 bg-navy/30 border border-blue-brand/20 rounded-sm">
+            <span class="text-blue-brand font-bold text-lg">!</span>
+            <p class="text-text-muted text-sm">
+              Flatbed is required for any load taller than 13'6", wider than 8'6", or that must be loaded from overhead.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          {[
+            { label: 'Max Standard Width', value: '8\'6"' },
+            { label: 'Max Standard Height', value: '8\'6"' },
+            { label: 'Max Trailer Length', value: '53 feet' },
+            { label: 'Max Payload', value: '48,000 lbs' },
+          ].map(spec => (
+            <div class="bg-bg-card border border-white/8 rounded-sm p-5 text-center">
+              <div class="font-heading font-black text-3xl text-blue-brand mb-1">{spec.value}</div>
+              <div class="text-text-muted text-xs font-medium uppercase tracking-wide">{spec.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Load Types -->
+  <section class="py-16 lg:py-20 bg-bg-secondary border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="mb-12">
+        <span class="section-label block mb-3">Cargo We Handle</span>
+        <h2 class="font-heading font-bold text-3xl lg:text-4xl text-text-primary">
+          Types of Loads We Move
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {loadTypes.map(load => (
+          <div class="bg-bg-card border border-white/5 rounded-sm p-6 hover:border-blue-brand/25 transition-colors group">
+            <div class="text-3xl mb-3">{load.icon}</div>
+            <h3 class="font-heading font-bold text-xl text-text-primary mb-2 group-hover:text-blue-brand transition-colors">{load.title}</h3>
+            <p class="text-text-muted text-sm leading-relaxed">{load.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipment Specs -->
+  <section class="py-16 lg:py-20 bg-bg">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="mb-12">
+        <span class="section-label block mb-3">Equipment</span>
+        <h2 class="font-heading font-bold text-3xl lg:text-4xl text-text-primary">
+          Trailer Options &amp; Specs
+        </h2>
+        <p class="text-text-muted mt-3 max-w-2xl text-sm leading-relaxed">
+          Not all flatbed freight is the same. We access the right trailer type for your cargo dimensions, weight, and loading method.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {equipment.map((eq, i) => (
+          <div class={`rounded-sm p-7 ${i === 0 ? 'bg-navy border border-blue-brand/30 shadow-blue-glow' : 'bg-bg-card border border-white/8'}`}>
+            {i === 0 && (
+              <div class="inline-block px-3 py-1 bg-blue-brand/20 border border-blue-brand/30 rounded-sm text-blue-brand text-xs font-bold uppercase tracking-wider mb-4">
+                Most Common
+              </div>
+            )}
+            <h3 class="font-heading font-bold text-xl text-text-primary mb-4">{eq.name}</h3>
+            <ul class="space-y-2.5">
+              {eq.specs.map(spec => (
+                <li class="flex items-start gap-2 text-text-muted text-sm">
+                  <div class="w-1.5 h-1.5 rounded-full bg-blue-brand mt-1.5 shrink-0"></div>
+                  {spec}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why BKE -->
+  <section class="py-16 lg:py-20 bg-bg-secondary border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="mb-12">
+        <span class="section-label block mb-3">Why BKE Logistics</span>
+        <h2 class="font-heading font-bold text-3xl lg:text-4xl text-text-primary">
+          The BKE Difference in Flatbed
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {whyBKE.map(item => (
+          <div class="flex gap-5 bg-bg-card border border-white/5 rounded-sm p-6 hover:border-blue-brand/20 transition-colors">
+            <div class="w-10 h-10 rounded-sm bg-blue-brand/10 border border-blue-brand/20 flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 text-blue-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-heading font-bold text-xl text-text-primary mb-2">{item.title}</h3>
+              <p class="text-text-muted text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <QuoteSection
+    headline="Need a Flatbed Quote?"
+    subtext="Tell us about your freight — dimensions, weight, origin, destination, and timeline. Our flatbed specialists will respond with a competitive rate and equipment recommendation within hours."
+    ctaLabel="Get a Flatbed Quote"
+  />
+</BaseLayout>

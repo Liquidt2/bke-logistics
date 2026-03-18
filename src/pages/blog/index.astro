@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import QuoteSection from '../../components/QuoteSection.astro';
+
+const posts = [
+  {
+    title: 'Flatbed vs. Step Deck: Which Trailer Do You Actually Need?',
+    date: 'March 10, 2025',
+    dateISO: '2025-03-10',
+    category: 'Equipment Guide',
+    excerpt: 'Choosing the wrong trailer type for your freight can mean delays, damage, or added costs. Here\'s a practical breakdown of when to use a standard flatbed versus a step deck — and how to decide based on your cargo\'s dimensions and weight.',
+    slug: 'flatbed-vs-step-deck',
+    readTime: '5 min read',
+  },
+  {
+    title: 'How to Prepare Your Freight for Flatbed Shipping',
+    date: 'February 22, 2025',
+    dateISO: '2025-02-22',
+    category: 'Shipping Tips',
+    excerpt: 'Open-deck freight requires different preparation than enclosed shipments. From load securement best practices to documentation requirements, this guide covers what shippers need to know before their first flatbed load.',
+    slug: 'prepare-freight-flatbed-shipping',
+    readTime: '7 min read',
+  },
+  {
+    title: 'Understanding FMCSA Regulations for Freight Shippers',
+    date: 'January 15, 2025',
+    dateISO: '2025-01-15',
+    category: 'Compliance',
+    excerpt: 'The Federal Motor Carrier Safety Administration\'s rules govern more than just carriers — shippers have compliance obligations too. Learn about shipper liability, hazmat considerations, and why working with a compliant carrier protects your business.',
+    slug: 'fmcsa-regulations-freight-shippers',
+    readTime: '8 min read',
+  },
+];
+---
+
+<BaseLayout
+  title="Blog"
+  description="BKE Logistics LLC blog — freight industry insights, shipping tips, equipment guides, and logistics news for shippers and industry professionals."
+>
+  <PageHero
+    title="Freight Insights"
+    subtitle="Practical knowledge from the trucking trenches — equipment guides, shipping tips, industry regulations, and logistics strategy for shippers who want to move smarter."
+    breadcrumb={[{ label: 'Blog' }]}
+    eyebrow="BKE Logistics Blog"
+  />
+
+  <!-- Sanity CMS note -->
+  <div class="bg-navy/20 border-b border-blue-brand/15">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 py-3 flex items-center gap-3">
+      <svg class="w-4 h-4 text-blue-brand shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <p class="text-text-subtle text-xs">
+        Powered by <strong class="text-text-muted">Sanity CMS</strong> — connect your Sanity project to populate live posts. See <code class="text-blue-brand">/studio</code> folder for schema setup.
+      </p>
+    </div>
+  </div>
+
+  <!-- Blog Grid -->
+  <section class="py-16 lg:py-24 bg-bg">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <!-- Featured post -->
+      <div class="mb-10">
+        <span class="section-label block mb-6">Latest Articles</span>
+
+        <article class="bg-bg-card border border-white/8 rounded-sm overflow-hidden hover:border-blue-brand/25 transition-all duration-300 group hover:shadow-card-hover mb-6">
+          <div class="p-8 lg:p-10">
+            <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="px-3 py-1 bg-blue-brand/10 border border-blue-brand/20 rounded-sm text-blue-brand text-xs font-bold uppercase tracking-wide">
+                    {posts[0].category}
+                  </span>
+                  <span class="text-text-subtle text-xs">{posts[0].readTime}</span>
+                </div>
+                <h2 class="font-heading font-bold text-3xl lg:text-4xl text-text-primary mb-4 group-hover:text-blue-brand transition-colors leading-tight">
+                  {posts[0].title}
+                </h2>
+                <p class="text-text-muted leading-relaxed mb-6 max-w-2xl">
+                  {posts[0].excerpt}
+                </p>
+                <div class="flex items-center justify-between">
+                  <time class="text-text-subtle text-xs" datetime={posts[0].dateISO}>{posts[0].date}</time>
+                  <a href={`/blog/${posts[0].slug}`} class="btn-primary py-2.5 px-6 text-xs">
+                    Read Article
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <!-- Decorative accent -->
+              <div class="hidden lg:flex w-48 h-48 bg-navy/40 border border-white/5 rounded-sm items-center justify-center shrink-0 group-hover:border-blue-brand/20 transition-colors">
+                <span class="font-heading font-black text-8xl text-white/5">01</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Remaining posts -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {posts.slice(1).map((post, i) => (
+          <article class="bg-bg-card border border-white/8 rounded-sm p-7 hover:border-blue-brand/25 transition-all duration-300 group hover:shadow-card-hover">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="px-3 py-1 bg-navy/50 border border-white/10 rounded-sm text-text-muted text-xs font-medium uppercase tracking-wide">
+                {post.category}
+              </span>
+              <span class="text-text-subtle text-xs">{post.readTime}</span>
+            </div>
+            <h2 class="font-heading font-bold text-2xl text-text-primary mb-3 group-hover:text-blue-brand transition-colors leading-tight">
+              {post.title}
+            </h2>
+            <p class="text-text-muted text-sm leading-relaxed mb-6">
+              {post.excerpt}
+            </p>
+            <div class="flex items-center justify-between pt-4 border-t border-white/5">
+              <time class="text-text-subtle text-xs" datetime={post.dateISO}>{post.date}</time>
+              <a href={`/blog/${post.slug}`} class="text-blue-brand text-sm font-semibold flex items-center gap-1.5 hover:gap-2.5 transition-all">
+                Read More
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Load more placeholder -->
+      <div class="text-center mt-12">
+        <p class="text-text-subtle text-sm mb-4">More articles will appear here once connected to Sanity CMS.</p>
+        <a href="/contact" class="btn-secondary">Subscribe to Updates</a>
+      </div>
+    </div>
+  </section>
+
+  <QuoteSection />
+</BaseLayout>

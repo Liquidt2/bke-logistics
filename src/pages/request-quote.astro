@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+---
+
+<BaseLayout
+  title="Request a Quote"
+  description="Request a freight quote from BKE Logistics LLC. Flatbed and dry van services across 48 states. Fast response, competitive rates, no hidden fees."
+>
+  <PageHero
+    title="Request a Quote"
+    subtitle="Fill out the form below with your shipment details and our team will respond with a competitive, transparent rate — typically within a few hours."
+    breadcrumb={[{ label: 'Request a Quote' }]}
+    eyebrow="Get a Rate"
+  />
+
+  <section class="py-16 lg:py-24 bg-bg">
+    <div class="max-w-5xl mx-auto px-5 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+        <!-- Instructions & what to expect -->
+        <div class="lg:col-span-1">
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-5">What to Expect</h2>
+
+          <div class="space-y-5 mb-8">
+            {[
+              { step: '01', title: 'Submit Your Details', desc: 'Fill out the quote form with your origin, destination, cargo type, dimensions, and weight.' },
+              { step: '02', title: 'Fast Response', desc: 'Our dispatch team reviews your shipment details and responds with a competitive rate — typically within 2–4 business hours.' },
+              { step: '03', title: 'Confirmation & Booking', desc: 'Once you approve the rate, we issue a rate confirmation and coordinate pickup scheduling directly with you.' },
+              { step: '04', title: 'Active Tracking', desc: 'From pickup to delivery, our team monitors your load and provides proactive status updates.' },
+            ].map(item => (
+              <div class="flex gap-4">
+                <div class="font-heading font-black text-2xl text-blue-brand/30 leading-none shrink-0 w-8">{item.step}</div>
+                <div>
+                  <h3 class="font-semibold text-text-primary text-sm mb-1">{item.title}</h3>
+                  <p class="text-text-muted text-xs leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="p-4 bg-bg-card border border-white/8 rounded-sm">
+            <h3 class="font-semibold text-text-primary text-sm mb-2">Need urgent capacity?</h3>
+            <p class="text-text-muted text-xs leading-relaxed mb-3">
+              For same-day or next-day requirements, call our dispatch line directly.
+            </p>
+            <a href="tel:+10000000000" class="text-blue-brand font-semibold text-sm hover:underline">(XXX) XXX-XXXX</a>
+            <div class="text-text-subtle text-xs mt-1">Available 24/7</div>
+          </div>
+        </div>
+
+        <!-- Form area -->
+        <div class="lg:col-span-2">
+          <div class="bg-bg-card border border-white/8 rounded-sm overflow-hidden">
+            <div class="border-b border-white/8 px-7 py-5">
+              <h2 class="font-heading font-bold text-xl text-text-primary">Shipment Quote Request</h2>
+              <p class="text-text-subtle text-xs mt-1">All fields marked with * are required</p>
+            </div>
+
+            <!-- ZOHO FORM EMBED AREA -->
+            <div class="p-7">
+              <!--
+                ============================================================
+                ZOHO FORM EMBED: Paste your Zoho Forms embed code here
+
+                To set up:
+                1. Log in to your Zoho Forms account at forms.zoho.com
+                2. Create or open your freight quote request form
+                3. Click "Share" → "Embed" to get the iframe/script code
+                4. Replace this placeholder section with your embed code
+
+                Example embed format:
+                <iframe
+                  aria-label="BKE Logistics Quote Request"
+                  frameborder="0"
+                  style="height:800px;width:100%;border:none;"
+                  src="https://forms.zohopublic.com/YOUR_ACCOUNT/form/FORM_NAME/formperma/FORM_ID">
+                </iframe>
+                ============================================================
+              -->
+              <div class="border-2 border-dashed border-blue-brand/20 rounded-sm bg-navy/10 p-10 flex flex-col items-center justify-center text-center min-h-[400px] gap-4">
+                <div class="w-16 h-16 rounded-sm bg-blue-brand/10 border border-blue-brand/20 flex items-center justify-center">
+                  <svg class="w-7 h-7 text-blue-brand/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-text-muted font-semibold text-sm mb-1">Zoho Form Embed Placeholder</p>
+                  <p class="text-text-subtle text-xs leading-relaxed max-w-xs">
+                    Replace this block with your Zoho Forms embed code. See the HTML comment above for instructions.
+                  </p>
+                </div>
+                <div class="mt-4 flex flex-col sm:flex-row gap-3">
+                  <a href="https://forms.zoho.com" target="_blank" rel="noopener noreferrer" class="btn-primary py-2 px-5 text-xs">
+                    Set Up Zoho Forms
+                  </a>
+                  <a href="mailto:dispatch@bkelogistics.com?subject=Quote Request" class="btn-secondary py-2 px-5 text-xs">
+                    Email a Quote Request
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Privacy note -->
+          <p class="text-text-subtle text-xs mt-4 px-1 leading-relaxed">
+            Your information is used solely to prepare and deliver your freight quote. We do not sell or share your data with third parties. By submitting this form, you agree to be contacted by BKE Logistics LLC regarding your shipment.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom trust strip -->
+  <section class="py-10 bg-bg-secondary border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="flex flex-wrap justify-center gap-8">
+        {[
+          { icon: '⚡', text: '2–4 Hour Response Time' },
+          { icon: '💰', text: 'No Hidden Fees' },
+          { icon: '🔒', text: 'No Obligation Quote' },
+          { icon: '📞', text: '24/7 Dispatch Support' },
+        ].map(item => (
+          <div class="flex items-center gap-2 text-text-muted">
+            <span>{item.icon}</span>
+            <span class="text-sm font-medium">{item.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
