@@ -8,7 +8,7 @@ interface Props {
 
 const {
   headline = 'Moving Freight.<br/>Building Trust.',
-  subheadline = 'BKE Logistics LLC delivers reliable flatbed and dry van freight solutions across 48 states — backed by 24/7 dispatch, real-time communication, and a commitment to on-time performance.',
+  subheadline = 'BKE Logistics LLC is an FMCSA-licensed freight broker connecting shippers with trusted carriers across 48 states. Flatbed, dry van, and specialty freight — handled with the expertise of someone who\'s been on both sides of the truck.',
   primaryCta = { label: 'Request a Quote', href: '/request-quote' },
   secondaryCta = { label: 'View Services', href: '/freight-services' },
 } = Astro.props;
@@ -31,7 +31,7 @@ const {
       <!-- Label -->
       <div class="flex items-center gap-3 mb-8 animate-fade-up">
         <div class="w-8 h-px bg-blue-brand rounded-full"></div>
-        <span class="section-label">FMCSA Certified · DOT Compliant · 48 States</span>
+        <span class="section-label">FMCSA Licensed · MC# 1588065 · 48 States</span>
       </div>
 
       <!-- Headline -->
@@ -62,9 +62,9 @@ const {
       <div class="flex flex-wrap items-center gap-6 mt-14 pt-10 border-t border-white/[0.06]">
         {[
           { icon: '✓', text: 'No Hidden Fees' },
-          { icon: '✓', text: '24/7 Dispatch' },
+          { icon: '✓', text: 'Direct Broker Access' },
           { icon: '✓', text: 'Real-Time Updates' },
-          { icon: '✓', text: 'Fully Insured' },
+          { icon: '✓', text: 'Surety Bonded' },
         ].map(item => (
           <div class="flex items-center gap-2">
             <span class="text-blue-brand text-sm font-bold">{item.icon}</span>

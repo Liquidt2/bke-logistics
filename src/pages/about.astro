@@ -7,32 +7,32 @@ const values = [
   {
     icon: '🎯',
     title: 'Reliability',
-    description: 'A commitment is a commitment. When we accept a load, we deliver it — on time, with the equipment specified, and with the care your cargo requires. Our on-time performance record reflects that this isn\'t just a talking point.',
+    description: 'When Harvey commits to covering a load, it gets covered. No ghosting, no excuses. Shippers deserve a broker who follows through — and that starts with answering the phone.',
   },
   {
     icon: '🔍',
     title: 'Transparency',
-    description: 'No surprises. Clear pricing from the start, real-time status updates in transit, and honest communication when circumstances change. We believe shippers deserve to know exactly what\'s happening with their freight.',
+    description: 'You\'ll know the rate, the carrier, and the status of your freight. No surprises at delivery. Honest communication is the foundation of every relationship BKE builds.',
   },
   {
     icon: '🛡️',
-    title: 'Safety',
-    description: 'Safety is non-negotiable at BKE Logistics. Our carriers maintain DOT compliance and clean safety records. We do not cut corners on Hours of Service, equipment inspections, or load securement — ever.',
+    title: 'Carrier Vetting',
+    description: 'BKE only works with vetted, insured carriers who maintain clean safety records. Harvey\'s background as a trucking company owner means he knows exactly what to look for.',
   },
   {
     icon: '⭐',
-    title: 'Excellence',
-    description: 'Good enough is never our standard. From how we answer the phone to how our drivers present themselves at the shipper\'s dock, we hold every aspect of our service to a high standard because that\'s what our clients deserve.',
+    title: 'Personal Service',
+    description: 'You\'re not calling a call center. When you work with BKE Logistics, you work directly with Harvey — someone with real skin in the game and real freight experience behind him.',
   },
 ];
 
-const milestones = [
-  { year: '2014', event: 'BKE Logistics LLC founded with a focus on flatbed freight in the Midwest' },
-  { year: '2016', event: 'Expanded dry van capabilities and Southeast corridor coverage' },
-  { year: '2018', event: 'Launched 24/7 dispatch operations for around-the-clock client support' },
-  { year: '2020', event: 'Grew carrier network to cover all 48 contiguous states' },
-  { year: '2022', event: 'Surpassed 500 consistent clients and 10,000 loads delivered' },
-  { year: '2024', event: 'Continued expansion into energy sector and oversized freight corridors' },
+const credentials = [
+  { label: 'MC Number', value: '1588065' },
+  { label: 'DOT Number', value: '4141583-B' },
+  { label: 'Bond', value: 'BMC-84 Surety Bond' },
+  { label: 'Authority', value: 'FMCSA Licensed Broker' },
+  { label: 'Founded', value: 'October 2024' },
+  { label: 'Based In', value: 'Hector, Arkansas' },
 ];
 ---
 
@@ -42,7 +42,7 @@ const milestones = [
 >
   <PageHero
     title="About BKE Logistics"
-    subtitle="We're a team of freight professionals who believe that logistics done right is more than moving boxes from A to B — it's about earning trust one shipment at a time."
+    subtitle="Founded by a trucking industry veteran who's been the driver, the owner, and now the broker — BKE Logistics brings firsthand freight expertise to every load."
     breadcrumb={[{ label: 'About' }]}
     eyebrow="Our Story"
   />
@@ -54,16 +54,16 @@ const milestones = [
         <div>
           <span class="section-label block mb-3">Who We Are</span>
           <h2 class="font-heading font-bold text-3xl lg:text-4xl text-text-primary mb-6">
-            Built by Freight People, for Freight People
+            Built by Someone Who's Been Behind the Wheel
           </h2>
           <p class="text-text-muted leading-relaxed mb-5">
-            BKE Logistics LLC was founded with a straightforward premise: freight brokerage and carrier services should be simple, reliable, and honest. Too many shippers had been burned by brokers who overpromised, underdelivered, and disappeared when things went sideways. We set out to be different.
+            BKE Logistics LLC was founded in October 2024 by Harvey Roberts — a freight industry veteran who's done it all. Harvey has owned and operated his own trucking company and driven the loads himself. That firsthand experience on both sides of the dock means he understands what shippers need and what carriers face, and he brings that knowledge to every freight move he brokers.
           </p>
           <p class="text-text-muted leading-relaxed mb-5">
-            From our first flatbed load in the Midwest, we focused on building genuine carrier relationships — not just filling load boards. That meant paying on time, communicating clearly, and treating every driver and shipper like a long-term partner rather than a transaction.
+            The name BKE means everything to Harvey — it stands for his three kids, Brayden, Kennedy, and Eli. That's not just a fun fact; it's a reflection of the values that drive the business. Every load is handled with the care you'd want if your name — and your family's name — was on it.
           </p>
           <p class="text-text-muted leading-relaxed">
-            Today, BKE Logistics serves clients across manufacturing, construction, agriculture, retail, and energy, with a carrier network spanning all 48 contiguous states. Our dispatch team operates around the clock, because freight doesn't stop at 5 PM and neither do we.
+            Based in Hector, Arkansas, BKE Logistics is an FMCSA-licensed freight broker specializing in flatbed and dry van freight across all 48 contiguous states. From steel coils and lumber to construction equipment and consumer goods, Harvey matches shippers with the right carriers and keeps communication clear from pickup to delivery.
           </p>
         </div>
 
@@ -72,20 +72,16 @@ const milestones = [
           <div class="bg-navy border border-blue-brand/20 rounded-sm p-8 mb-6">
             <div class="font-heading font-black text-5xl text-blue-brand/20 leading-none mb-3">"</div>
             <p class="font-heading font-bold text-2xl text-text-primary leading-snug">
-              To be the freight partner that shippers actually rely on — with the reliability, transparency, and communication that the industry has historically failed to deliver consistently.
+              To be the freight broker that shippers actually trust — because I've been in their shoes, and I know what it means when a load doesn't show up.
             </p>
           </div>
 
-          <!-- Timeline -->
-          <div class="space-y-4">
-            {milestones.map(m => (
-              <div class="flex gap-4">
-                <div class="w-12 shrink-0">
-                  <div class="font-heading font-bold text-blue-brand text-sm">{m.year}</div>
-                </div>
-                <div class="flex-1 pb-4 border-b border-white/5 last:border-0">
-                  <p class="text-text-muted text-sm leading-relaxed">{m.event}</p>
-                </div>
+          <!-- Credentials -->
+          <div class="grid grid-cols-2 gap-3 mt-2">
+            {credentials.map(c => (
+              <div class="p-4 rounded-xl" style="background: rgba(23,105,212,0.06); border: 1px solid rgba(23,105,212,0.18);">
+                <div class="text-text-subtle text-xs uppercase tracking-wider mb-1">{c.label}</div>
+                <div class="font-heading font-bold text-text-primary text-sm">{c.value}</div>
               </div>
             ))}
           </div>
@@ -123,32 +119,40 @@ const milestones = [
     </div>
   </section>
 
-  <!-- Team placeholder -->
+  <!-- Owner -->
   <section class="py-16 lg:py-20 bg-bg">
     <div class="max-w-7xl mx-auto px-5 lg:px-8">
-      <div class="flex flex-col lg:flex-row gap-12 items-start">
+      <div class="flex flex-col lg:flex-row gap-12 items-center">
         <div class="lg:w-1/2">
-          <span class="section-label block mb-3">Leadership</span>
+          <span class="section-label block mb-3">Owner & Broker</span>
           <h2 class="font-heading font-bold text-3xl lg:text-4xl text-text-primary mb-5">
-            The Team Behind BKE
+            Harvey Roberts
           </h2>
           <p class="text-text-muted leading-relaxed mb-4">
-            BKE Logistics is led by industry veterans who have worked in freight brokerage, carrier operations, and shipper logistics. This cross-perspective experience means we understand the challenges on every side of the freight equation.
+            Harvey has worked in the trucking industry from the ground up — as a commercial driver and as a trucking company owner. That experience gives him a perspective most freight brokers simply don't have. He knows what it takes to load a flatbed correctly, what drivers deal with on the road, and what shippers need to keep their operations running.
           </p>
-          <p class="text-text-muted leading-relaxed text-sm">
-            Our dispatch and operations team members have an average of 7+ years in the trucking industry. They know the lanes, the carriers, and the challenges — and they use that knowledge every day to solve problems before they become your problem.
+          <p class="text-text-muted leading-relaxed mb-6">
+            Now as an FMCSA-licensed freight broker, Harvey puts that experience to work for his clients — finding the right carrier for every load, negotiating fair rates, and staying in communication from start to finish. No middleman runaround. Just straight-talking freight service from someone who's done the work.
           </p>
+          <div class="flex flex-wrap gap-3">
+            {['Former Trucking Company Owner', 'Commercial Driver', 'FMCSA Licensed Broker', 'Surety Bonded'].map(tag => (
+              <span class="text-xs font-medium text-text-muted px-3 py-1.5 rounded-lg" style="background: rgba(23,105,212,0.08); border: 1px solid rgba(23,105,212,0.2);">{tag}</span>
+            ))}
+          </div>
         </div>
 
-        <div class="lg:w-1/2 grid grid-cols-2 gap-4">
-          {['Operations & Dispatch', 'Carrier Relations', 'Account Management', 'Compliance & Safety'].map(role => (
-            <div class="bg-bg-card border border-white/8 rounded-sm p-5 text-center hover:border-blue-brand/20 transition-colors">
-              <div class="w-12 h-12 rounded-full bg-navy/60 border border-white/10 mx-auto mb-3 flex items-center justify-center">
-                <svg class="w-5 h-5 text-text-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                </svg>
-              </div>
-              <div class="text-text-muted text-xs font-medium">{role}</div>
+        <div class="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            { icon: '📞', label: 'Direct Line', value: '(479) 351-0393', note: 'Call or text Harvey directly' },
+            { icon: '✉️', label: 'Email', value: 'harveyr@bkelogistics.com', note: 'Responds within hours' },
+            { icon: '📍', label: 'Based In', value: 'Hector, Arkansas', note: 'Serving all 48 states' },
+            { icon: '🏷️', label: 'MC Number', value: '#1588065', note: 'FMCSA Licensed & Bonded' },
+          ].map(item => (
+            <div class="rounded-2xl p-5 hover:border-blue-brand/20 transition-colors" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);">
+              <div class="text-2xl mb-2">{item.icon}</div>
+              <div class="text-text-subtle text-xs uppercase tracking-wider mb-1">{item.label}</div>
+              <div class="font-heading font-bold text-text-primary text-sm">{item.value}</div>
+              <div class="text-text-subtle text-xs mt-1">{item.note}</div>
             </div>
           ))}
         </div>
