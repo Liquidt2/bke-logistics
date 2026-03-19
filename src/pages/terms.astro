@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const lastUpdated = 'March 2026';
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description="Terms of Service for BKE Logistics LLC. Terms governing the use of our website and freight brokerage services."
+>
+  <PageHero
+    title="Terms of Service"
+    subtitle="Terms and conditions governing the use of bkelogistics.com and BKE Logistics LLC services."
+    breadcrumb={[{ label: 'Terms of Service' }]}
+    eyebrow="Legal"
+  />
+
+  <section class="py-16 lg:py-24 bg-bg">
+    <div class="max-w-3xl mx-auto px-5 lg:px-8">
+
+      <div class="mb-8 p-4 rounded-xl text-sm text-text-muted" style="background: rgba(23,105,212,0.06); border: 1px solid rgba(23,105,212,0.15);">
+        Last updated: {lastUpdated}
+      </div>
+
+      <div class="space-y-10">
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">1. Acceptance of Terms</h2>
+          <p class="text-text-muted leading-relaxed">
+            By accessing or using the website bkelogistics.com ("Site"), you agree to be bound by these Terms of Service. If you do not agree, please do not use the Site. BKE Logistics LLC reserves the right to update these terms at any time, with changes effective upon posting.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">2. About BKE Logistics LLC</h2>
+          <p class="text-text-muted leading-relaxed">
+            BKE Logistics LLC is an FMCSA-licensed freight broker (MC# 1588065) based in Hector, Arkansas. We arrange transportation of freight by connecting shippers with licensed motor carriers. BKE Logistics LLC is a broker only — we do not own or operate the vehicles that transport freight.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">3. Use of This Website</h2>
+          <p class="text-text-muted leading-relaxed mb-4">You agree to use this Site only for lawful purposes. You may not:</p>
+          <ul class="space-y-2 text-text-muted">
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Use the Site in any way that violates applicable federal, state, or local laws or regulations</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Attempt to gain unauthorized access to any part of the Site or its related systems</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Submit false, misleading, or fraudulent information through our quote or contact forms</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Use the Site to transmit spam, malware, or any harmful content</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">4. Quote Requests & Services</h2>
+          <p class="text-text-muted leading-relaxed">
+            Submitting a quote request through our Site does not constitute a binding contract or guarantee of service. All freight quotes are subject to carrier availability, current market conditions, and acceptance by BKE Logistics LLC. A binding agreement is established only upon issuance of a signed rate confirmation between BKE Logistics LLC and the shipper.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">5. Intellectual Property</h2>
+          <p class="text-text-muted leading-relaxed">
+            All content on this Site — including text, graphics, logos, and design — is the property of BKE Logistics LLC and is protected by applicable copyright and trademark laws. You may not reproduce, distribute, or create derivative works from any content on this Site without our prior written permission.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">6. Disclaimer of Warranties</h2>
+          <p class="text-text-muted leading-relaxed">
+            This Site and its content are provided "as is" without warranties of any kind, either express or implied. BKE Logistics LLC does not warrant that the Site will be uninterrupted, error-free, or free of viruses or other harmful components. We make no warranties regarding the accuracy, completeness, or reliability of any information on the Site.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">7. Limitation of Liability</h2>
+          <p class="text-text-muted leading-relaxed">
+            To the fullest extent permitted by law, BKE Logistics LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of — or inability to use — this Site or our services. Our total liability for any claim arising out of or related to the Site shall not exceed $100.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">8. Third-Party Links</h2>
+          <p class="text-text-muted leading-relaxed">
+            Our Site may contain links to third-party websites. These links are provided for your convenience only. BKE Logistics LLC has no control over the content of those sites and accepts no responsibility for them or for any loss or damage that may arise from your use of them.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">9. Governing Law</h2>
+          <p class="text-text-muted leading-relaxed">
+            These Terms of Service are governed by the laws of the State of Arkansas, without regard to its conflict of law provisions. Any disputes arising under these terms shall be subject to the exclusive jurisdiction of the courts located in Pope County, Arkansas.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">10. Contact Us</h2>
+          <p class="text-text-muted leading-relaxed mb-4">Questions about these Terms of Service? Reach us at:</p>
+          <div class="p-5 rounded-xl space-y-2" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);">
+            <p class="text-text-primary font-semibold">BKE Logistics LLC</p>
+            <p class="text-text-muted text-sm">19840 SR 124, Hector, Arkansas 72842</p>
+            <p class="text-text-muted text-sm"><a href="tel:+14793510393" class="text-blue-brand hover:underline">(479) 351-0393</a></p>
+            <p class="text-text-muted text-sm"><a href="mailto:harveyr@bkelogistics.com" class="text-blue-brand hover:underline">harveyr@bkelogistics.com</a></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>

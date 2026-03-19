@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const lastUpdated = 'March 2026';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Privacy Policy for BKE Logistics LLC. Learn how we collect, use, and protect your information."
+>
+  <PageHero
+    title="Privacy Policy"
+    subtitle="How BKE Logistics LLC collects, uses, and protects your information."
+    breadcrumb={[{ label: 'Privacy Policy' }]}
+    eyebrow="Legal"
+  />
+
+  <section class="py-16 lg:py-24 bg-bg">
+    <div class="max-w-3xl mx-auto px-5 lg:px-8">
+
+      <div class="mb-8 p-4 rounded-xl text-sm text-text-muted" style="background: rgba(23,105,212,0.06); border: 1px solid rgba(23,105,212,0.15);">
+        Last updated: {lastUpdated}
+      </div>
+
+      <div class="prose-bke space-y-10">
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">1. Who We Are</h2>
+          <p class="text-text-muted leading-relaxed">
+            BKE Logistics LLC ("BKE," "we," "our," or "us") is an FMCSA-licensed freight brokerage based in Hector, Arkansas (MC# 1588065). This Privacy Policy explains how we collect, use, and protect information gathered through our website at bkelogistics.com.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">2. Information We Collect</h2>
+          <p class="text-text-muted leading-relaxed mb-4">We collect information you voluntarily provide when:</p>
+          <ul class="space-y-2 text-text-muted">
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Submitting a freight quote request (name, company, phone, email, shipment details)</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Using our contact form (name, email, phone, message)</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Calling or emailing us directly</span></li>
+          </ul>
+          <p class="text-text-muted leading-relaxed mt-4">
+            We may also collect standard web analytics data (page views, browser type, referral source) through anonymized analytics tools to improve our website performance.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">3. How We Use Your Information</h2>
+          <p class="text-text-muted leading-relaxed mb-4">We use the information you provide solely to:</p>
+          <ul class="space-y-2 text-text-muted">
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Respond to your freight quote requests and provide rate information</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Communicate with you about your shipments and logistics needs</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Follow up on inquiries you have submitted</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Improve our website and services</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">4. We Do Not Sell Your Data</h2>
+          <p class="text-text-muted leading-relaxed">
+            BKE Logistics LLC does not sell, rent, trade, or otherwise transfer your personal information to third parties for marketing purposes. Period. Your information is used only to fulfill the service you requested — a freight quote or general inquiry.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">5. Data Sharing</h2>
+          <p class="text-text-muted leading-relaxed mb-4">
+            We may share limited information with:
+          </p>
+          <ul class="space-y-2 text-text-muted">
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span><strong class="text-text-primary">CRM tools</strong> — We use Zoho CRM internally to manage quote requests and communications. Your data is stored securely within these systems.</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span><strong class="text-text-primary">Carriers</strong> — If you book a load with us, we share necessary shipment details (pickup/delivery addresses, commodity, weight) with the assigned carrier to complete your shipment.</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span><strong class="text-text-primary">Legal requirements</strong> — We may disclose information if required by law or to protect the rights and safety of BKE Logistics or others.</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">6. Data Security</h2>
+          <p class="text-text-muted leading-relaxed">
+            We take reasonable precautions to protect your information. Our website uses HTTPS encryption. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">7. Cookies</h2>
+          <p class="text-text-muted leading-relaxed">
+            Our website may use cookies for basic functionality and analytics. We do not use cookies for advertising or cross-site tracking. You can disable cookies in your browser settings without affecting your ability to use our site.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">8. Your Rights</h2>
+          <p class="text-text-muted leading-relaxed mb-4">You have the right to:</p>
+          <ul class="space-y-2 text-text-muted">
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Request a copy of the personal information we hold about you</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Ask us to correct or delete your information</span></li>
+            <li class="flex items-start gap-2"><span class="text-blue-brand mt-1">•</span><span>Opt out of any future communications from us</span></li>
+          </ul>
+          <p class="text-text-muted leading-relaxed mt-4">To exercise these rights, contact us at <a href="mailto:harveyr@bkelogistics.com" class="text-blue-brand hover:underline">harveyr@bkelogistics.com</a>.</p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">9. Children's Privacy</h2>
+          <p class="text-text-muted leading-relaxed">
+            Our website is not directed at children under 13. We do not knowingly collect personal information from children.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">10. Changes to This Policy</h2>
+          <p class="text-text-muted leading-relaxed">
+            We may update this Privacy Policy from time to time. Changes will be posted on this page with a revised "Last updated" date. Continued use of the website after changes constitutes acceptance of the updated policy.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-text-primary mb-4">11. Contact Us</h2>
+          <p class="text-text-muted leading-relaxed mb-4">Questions about this Privacy Policy? Contact us:</p>
+          <div class="p-5 rounded-xl space-y-2" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);">
+            <p class="text-text-primary font-semibold">BKE Logistics LLC</p>
+            <p class="text-text-muted text-sm">19840 SR 124, Hector, Arkansas 72842</p>
+            <p class="text-text-muted text-sm"><a href="tel:+14793510393" class="text-blue-brand hover:underline">(479) 351-0393</a></p>
+            <p class="text-text-muted text-sm"><a href="mailto:harveyr@bkelogistics.com" class="text-blue-brand hover:underline">harveyr@bkelogistics.com</a></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
