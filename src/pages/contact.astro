@@ -112,6 +112,7 @@ import QuoteSection from '../components/QuoteSection.astro';
           </div>
 
           <form
+            id="contact-form"
             action="#"
             method="POST"
             class="space-y-5"
@@ -212,13 +213,29 @@ import QuoteSection from '../components/QuoteSection.astro';
 
             <button
               type="submit"
+              id="contact-submit-btn"
               class="btn-primary w-full justify-center py-4"
             >
-              Send Message
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span id="contact-btn-text">Send Message</span>
+              <svg id="contact-btn-arrow" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
               </svg>
+              <svg id="contact-btn-spinner" class="w-4 h-4 hidden animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+              </svg>
             </button>
+
+            <div id="contact-success" class="hidden mt-5 p-5 rounded-xl text-center" style="background: rgba(23,212,80,0.08); border: 1px solid rgba(23,212,80,0.25);">
+              <div class="text-2xl mb-2">✅</div>
+              <p class="font-heading font-bold text-white text-lg mb-1">Message Sent!</p>
+              <p class="text-text-muted text-sm">Harvey will be in touch soon — expect a response within a few hours.</p>
+            </div>
+
+            <div id="contact-error" class="hidden mt-5 p-5 rounded-xl text-center" style="background: rgba(212,23,23,0.08); border: 1px solid rgba(212,23,23,0.25);">
+              <p class="font-semibold text-red-400 text-sm mb-1">Something went wrong.</p>
+              <p class="text-text-muted text-xs">Please try again or reach Harvey directly at <a href="tel:+14793510393" class="text-blue-brand hover:underline">(479) 351-0393</a>.</p>
+            </div>
           </form>
         </div>
       </div>
@@ -227,7 +244,76 @@ import QuoteSection from '../components/QuoteSection.astro';
 
   <QuoteSection
     headline="Need a Rate — Fast?"
-    subtext="Skip the form and go straight to a quote. Our dispatch team responds to quote requests within hours — no obligation, no pressure."
+    subtext="Skip the form and go straight to a quote. Harvey responds personally within hours — no obligation, no pressure."
     ctaLabel="Request a Quote"
   />
 </BaseLayout>
+
+<script>
+  const WEBHOOK_URL = 'https://klaus.bkelogistics.com/hooks/agent';
+  const WEBHOOK_TOKEN = 'b31f59bd31db58608bdc6c8418b94edca02eb20af25c526ed4b1a8935f5d9c5f';
+  const WEBHOOK_TO = '7237377009';
+
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('contact-submit-btn');
+      const btnText = document.getElementById('contact-btn-text');
+      const btnArrow = document.getElementById('contact-btn-arrow');
+      const btnSpinner = document.getElementById('contact-btn-spinner');
+      const successEl = document.getElementById('contact-success');
+      const errorEl = document.getElementById('contact-error');
+
+      const firstName = (form.querySelector('#first-name') as HTMLInputElement).value.trim();
+      const lastName = (form.querySelector('#last-name') as HTMLInputElement).value.trim();
+      const email = (form.querySelector('#email') as HTMLInputElement).value.trim();
+      const phone = (form.querySelector('#phone') as HTMLInputElement).value.trim();
+      const subject = (form.querySelector('#subject') as HTMLSelectElement).value;
+      const message = (form.querySelector('#message') as HTMLTextAreaElement).value.trim();
+
+      const messageText = `[Contact Form] Name: ${firstName} ${lastName} | Email: ${email}${phone ? ` | Phone: ${phone}` : ''} | Subject: ${subject} | Message: ${message}`;
+
+      const payload = {
+        message: messageText,
+        name: 'Website Forms',
+        wakeMode: 'now',
+        deliver: true,
+        channel: 'telegram',
+        to: WEBHOOK_TO,
+      };
+
+      submitBtn.disabled = true;
+      btnText.textContent = 'Sending...';
+      btnArrow.classList.add('hidden');
+      btnSpinner.classList.remove('hidden');
+      successEl.classList.add('hidden');
+      errorEl.classList.add('hidden');
+
+      try {
+        const response = await fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${WEBHOOK_TOKEN}`,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        form.reset();
+        successEl.classList.remove('hidden');
+      } catch (err) {
+        errorEl.classList.remove('hidden');
+        console.error('Contact form error:', err);
+      } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = 'Send Message';
+        btnArrow.classList.remove('hidden');
+        btnSpinner.classList.add('hidden');
+      }
+    });
+  }
+</script>

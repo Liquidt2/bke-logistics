@@ -3,9 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 
 // ─── OPENCLAW WEBHOOK ────────────────────────────────────────────────────────
-// Paste your OpenClaw webhook URL below once you have it.
-// OpenClaw will receive the form data and push it into Zoho CRM.
-const OPENCLAW_WEBHOOK_URL = 'YOUR_OPENCLAW_WEBHOOK_URL';
+const OPENCLAW_WEBHOOK_URL = 'https://klaus.bkelogistics.com/hooks/agent';
+const OPENCLAW_TOKEN = 'b31f59bd31db58608bdc6c8418b94edca02eb20af25c526ed4b1a8935f5d9c5f';
+const OPENCLAW_TO = '7237377009';
 // ─────────────────────────────────────────────────────────────────────────────
 ---
 
@@ -263,7 +263,7 @@ const OPENCLAW_WEBHOOK_URL = 'YOUR_OPENCLAW_WEBHOOK_URL';
 
 </BaseLayout>
 
-<script define:vars={{ OPENCLAW_WEBHOOK_URL }}>
+<script define:vars={{ OPENCLAW_WEBHOOK_URL, OPENCLAW_TOKEN, OPENCLAW_TO }}>
   const form = document.getElementById('quote-form');
   const submitBtn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
@@ -275,28 +275,28 @@ const OPENCLAW_WEBHOOK_URL = 'YOUR_OPENCLAW_WEBHOOK_URL';
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Collect form data
-    const data = {
-      source: 'BKE Logistics Website - Quote Request',
-      submitted_at: new Date().toISOString(),
-      contact: {
-        full_name: form.full_name.value.trim(),
-        company: form.company.value.trim(),
-        email: form.email.value.trim(),
-        phone: form.phone.value.trim(),
-      },
-      route: {
-        origin: `${form.origin_city.value.trim()}, ${form.origin_state.value.trim().toUpperCase()}`,
-        destination: `${form.dest_city.value.trim()}, ${form.dest_state.value.trim().toUpperCase()}`,
-      },
-      freight: {
-        type: form.freight_type.value,
-        commodity: form.commodity.value.trim(),
-        weight_lbs: form.weight.value.trim(),
-        dimensions: form.dimensions.value.trim(),
-        pickup_date: form.pickup_date.value,
-      },
-      notes: form.notes.value.trim(),
+    const name = form.full_name.value.trim();
+    const company = form.company.value.trim();
+    const email = form.email.value.trim();
+    const phone = form.phone.value.trim();
+    const origin = `${form.origin_city.value.trim()}, ${form.origin_state.value.trim().toUpperCase()}`;
+    const destination = `${form.dest_city.value.trim()}, ${form.dest_state.value.trim().toUpperCase()}`;
+    const freightType = form.freight_type.value;
+    const commodity = form.commodity.value.trim();
+    const weight = form.weight.value.trim();
+    const dimensions = form.dimensions.value.trim();
+    const pickupDate = form.pickup_date.value;
+    const notes = form.notes.value.trim();
+
+    const messageText = `[Quote Request] Name: ${name}${company ? ` | Company: ${company}` : ''} | Email: ${email} | Phone: ${phone} | Origin: ${origin} | Destination: ${destination} | Type: ${freightType} | Commodity: ${commodity} | Weight: ${weight} lbs | Pickup: ${pickupDate}${dimensions ? ` | Dimensions: ${dimensions}` : ''}${notes ? ` | Notes: ${notes}` : ''}`;
+
+    const payload = {
+      message: messageText,
+      name: 'Website Forms',
+      wakeMode: 'now',
+      deliver: true,
+      channel: 'telegram',
+      to: OPENCLAW_TO,
     };
 
     // Loading state
@@ -308,33 +308,22 @@ const OPENCLAW_WEBHOOK_URL = 'YOUR_OPENCLAW_WEBHOOK_URL';
     formError.classList.add('hidden');
 
     try {
-      // If no webhook URL is configured yet, simulate success in dev
-      if (!OPENCLAW_WEBHOOK_URL || OPENCLAW_WEBHOOK_URL === 'YOUR_OPENCLAW_WEBHOOK_URL') {
-        console.log('📋 Quote form data (webhook not yet configured):', data);
-        await new Promise(r => setTimeout(r, 800)); // simulate network
-        throw new Error('WEBHOOK_NOT_CONFIGURED');
-      }
-
       const response = await fetch(OPENCLAW_WEBHOOK_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${OPENCLAW_TOKEN}`,
+        },
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-      // Success
       form.reset();
       formSuccess.classList.remove('hidden');
     } catch (err) {
-      if (err.message === 'WEBHOOK_NOT_CONFIGURED') {
-        // Dev mode — show success anyway so we can see the form works
-        form.reset();
-        formSuccess.classList.remove('hidden');
-      } else {
-        formError.classList.remove('hidden');
-        console.error('Quote form error:', err);
-      }
+      formError.classList.remove('hidden');
+      console.error('Quote form error:', err);
     } finally {
       submitBtn.disabled = false;
       btnText.textContent = 'Request My Quote';
