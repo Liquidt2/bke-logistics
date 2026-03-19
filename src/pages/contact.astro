@@ -242,7 +242,6 @@ import QuoteSection from '../components/QuoteSection.astro';
 
 <script>
   const WEBHOOK_URL = '/api/webhook';
-  const WEBHOOK_TO = '7237377009';
 
   const form = document.getElementById('contact-form');
   if (form) {
@@ -267,11 +266,6 @@ import QuoteSection from '../components/QuoteSection.astro';
 
       const payload = {
         message: messageText,
-        name: 'Website Forms',
-        wakeMode: 'now',
-        deliver: true,
-        channel: 'telegram',
-        to: WEBHOOK_TO,
       };
 
       submitBtn.disabled = true;

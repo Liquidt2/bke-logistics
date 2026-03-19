@@ -4,7 +4,6 @@ import PageHero from '../components/PageHero.astro';
 
 // ─── OPENCLAW WEBHOOK (proxied through nginx to avoid CORS) ──────────────────
 const OPENCLAW_WEBHOOK_URL = '/api/webhook';
-const OPENCLAW_TO = '7237377009';
 // ─────────────────────────────────────────────────────────────────────────────
 ---
 
@@ -320,7 +319,7 @@ const OPENCLAW_TO = '7237377009';
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-<script define:vars={{ OPENCLAW_WEBHOOK_URL, OPENCLAW_TO }}>
+<script define:vars={{ OPENCLAW_WEBHOOK_URL }}>
   // Initialize flatpickr date picker
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -360,11 +359,6 @@ const OPENCLAW_TO = '7237377009';
 
     const payload = {
       message: messageText,
-      name: 'Website Forms',
-      wakeMode: 'now',
-      deliver: true,
-      channel: 'telegram',
-      to: OPENCLAW_TO,
     };
 
     // Loading state
