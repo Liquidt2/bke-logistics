@@ -262,10 +262,15 @@ import QuoteSection from '../components/QuoteSection.astro';
       const subject = (form.querySelector('#subject') as HTMLSelectElement).value;
       const message = (form.querySelector('#message') as HTMLTextAreaElement).value.trim();
 
-      const messageText = `[Contact Form] Name: ${firstName} ${lastName} | Email: ${email}${phone ? ` | Phone: ${phone}` : ''} | Subject: ${subject} | Message: ${message}`;
+      const messageText = `${subject} | ${message}`;
 
       const payload = {
+        name: `${firstName} ${lastName}`,
+        email: email,
+        phone: phone || '',
         message: messageText,
+        deliver: true,
+        kanban: true,
       };
 
       submitBtn.disabled = true;

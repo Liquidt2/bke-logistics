@@ -355,10 +355,15 @@ const OPENCLAW_WEBHOOK_URL = '/api/webhook';
     const pickupDate = form.pickup_date.value;
     const notes = form.notes.value.trim();
 
-    const messageText = `[Quote Request] Name: ${name}${company ? ` | Company: ${company}` : ''} | Email: ${email} | Phone: ${phone} | Origin: ${origin} | Destination: ${destination} | Type: ${freightType} | Commodity: ${commodity} | Weight: ${weight} lbs | Pickup: ${pickupDate}${dimensions ? ` | Dimensions: ${dimensions}` : ''}${notes ? ` | Notes: ${notes}` : ''}`;
+    const messageText = `Quote: ${origin} → ${destination} | ${freightType} | ${commodity} | ${weight} lbs | Pickup: ${pickupDate}${company ? ` | Company: ${company}` : ''}${dimensions ? ` | Dimensions: ${dimensions}` : ''}${notes ? ` | Notes: ${notes}` : ''}`;
 
     const payload = {
+      name: name,
+      email: email,
+      phone: phone,
       message: messageText,
+      deliver: true,
+      kanban: true,
     };
 
     // Loading state
