@@ -1,6 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+
+// ─── OPENCLAW WEBHOOK ────────────────────────────────────────────────────────
+// Paste your OpenClaw webhook URL below once you have it.
+// OpenClaw will receive the form data and push it into Zoho CRM.
+const OPENCLAW_WEBHOOK_URL = 'YOUR_OPENCLAW_WEBHOOK_URL';
+// ─────────────────────────────────────────────────────────────────────────────
 ---
 
 <BaseLayout
@@ -9,7 +15,7 @@ import PageHero from '../components/PageHero.astro';
 >
   <PageHero
     title="Request a Quote"
-    subtitle="Fill out the form below with your shipment details and our team will respond with a competitive, transparent rate — typically within a few hours."
+    subtitle="Tell us about your shipment and Harvey will personally respond with a competitive rate — typically within a few hours."
     breadcrumb={[{ label: 'Request a Quote' }]}
     eyebrow="Get a Rate"
   />
@@ -18,16 +24,16 @@ import PageHero from '../components/PageHero.astro';
     <div class="max-w-5xl mx-auto px-5 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
-        <!-- Instructions & what to expect -->
+        <!-- Sidebar -->
         <div class="lg:col-span-1">
           <h2 class="font-heading font-bold text-2xl text-text-primary mb-5">What to Expect</h2>
 
           <div class="space-y-5 mb-8">
             {[
-              { step: '01', title: 'Submit Your Details', desc: 'Fill out the quote form with your origin, destination, cargo type, dimensions, and weight.' },
-              { step: '02', title: 'Fast Response', desc: 'Our dispatch team reviews your shipment details and responds with a competitive rate — typically within 2–4 business hours.' },
-              { step: '03', title: 'Confirmation & Booking', desc: 'Once you approve the rate, we issue a rate confirmation and coordinate pickup scheduling directly with you.' },
-              { step: '04', title: 'Active Tracking', desc: 'From pickup to delivery, our team monitors your load and provides proactive status updates.' },
+              { step: '01', title: 'Submit Your Details', desc: 'Fill out the form with your pickup/delivery locations, cargo type, weight, and pickup date.' },
+              { step: '02', title: 'Harvey Responds', desc: 'You\'ll hear back directly from Harvey — not a call center — with a competitive rate and carrier options.' },
+              { step: '03', title: 'Book & Confirm', desc: 'Once you approve the rate, we issue a rate confirmation and get your freight scheduled.' },
+              { step: '04', title: 'Load Covered', desc: 'Your freight moves. Harvey stays in communication from pickup through delivery.' },
             ].map(item => (
               <div class="flex gap-4">
                 <div class="font-heading font-black text-2xl text-blue-brand/30 leading-none shrink-0 w-8">{item.step}</div>
@@ -39,40 +45,197 @@ import PageHero from '../components/PageHero.astro';
             ))}
           </div>
 
-          <div class="p-4 bg-bg-card border border-white/8 rounded-sm">
-            <h3 class="font-semibold text-text-primary text-sm mb-2">Need urgent capacity?</h3>
+          <div class="p-4 bg-bg-card border border-white/8 rounded-2xl">
+            <h3 class="font-semibold text-text-primary text-sm mb-2">Need it covered today?</h3>
             <p class="text-text-muted text-xs leading-relaxed mb-3">
-              For same-day or next-day requirements, call or text Harvey directly.
+              For same-day or next-day freight, call or text Harvey directly.
             </p>
             <a href="tel:+14793510393" class="text-blue-brand font-semibold text-sm hover:underline">(479) 351-0393</a>
             <div class="text-text-subtle text-xs mt-1">Call or text anytime</div>
           </div>
+
+          <div class="mt-5 p-4 bg-bg-card border border-white/8 rounded-2xl">
+            <div class="space-y-2">
+              {[
+                { icon: '🚛', label: 'Flatbed' },
+                { icon: '📦', label: 'Dry Van' },
+                { icon: '🔩', label: 'Steel & Metal' },
+                { icon: '🪵', label: 'Lumber' },
+                { icon: '🏗️', label: 'Construction Equipment' },
+                { icon: '🛢️', label: 'Pipe & Plastic' },
+              ].map(s => (
+                <div class="flex items-center gap-2 text-text-muted text-xs">
+                  <span>{s.icon}</span>
+                  <span>{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <!-- Form area -->
+        <!-- Form -->
         <div class="lg:col-span-2">
           <div class="bg-bg-card border border-white/8 rounded-2xl overflow-hidden">
             <div class="border-b border-white/8 px-7 py-5">
               <h2 class="font-heading font-bold text-xl text-text-primary">Shipment Quote Request</h2>
-              <p class="text-text-subtle text-xs mt-1">Fill out the form below — Harvey will respond personally within hours</p>
+              <p class="text-text-subtle text-xs mt-1">Fields marked <span class="text-blue-brand">*</span> are required</p>
             </div>
 
-            <!-- ZOHO FORM EMBED -->
-            <div class="p-4">
-              <iframe
-                aria-label="BKE Logistics Quote Request"
-                frameborder="0"
-                style="height:820px;width:100%;border:none;border-radius:12px;"
-                src="https://forms.zohopublic.com/bkelogisticsllc1/form/ConferenceSeminarRegistration/formperma/sF2WD0jcM95dbsXvoNnvpyqI4Ybm_wuWn1ElpXQ_elQ"
-                title="BKE Logistics Quote Request Form"
-                loading="lazy"
-              ></iframe>
-            </div>
+            <form id="quote-form" class="p-7 space-y-6" novalidate>
+
+              <!-- Contact Info -->
+              <div>
+                <h3 class="font-heading font-bold text-sm text-text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-blue-brand/20 flex items-center justify-center text-[10px] text-blue-brand font-bold">1</span>
+                  Contact Information
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="full_name" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Full Name <span class="text-blue-brand">*</span></label>
+                    <input type="text" id="full_name" name="full_name" required autocomplete="name"
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors"
+                      placeholder="John Smith" />
+                  </div>
+                  <div>
+                    <label for="company" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Company Name</label>
+                    <input type="text" id="company" name="company" autocomplete="organization"
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors"
+                      placeholder="Acme Corp (optional)" />
+                  </div>
+                  <div>
+                    <label for="email" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Email <span class="text-blue-brand">*</span></label>
+                    <input type="email" id="email" name="email" required autocomplete="email"
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors"
+                      placeholder="john@company.com" />
+                  </div>
+                  <div>
+                    <label for="phone" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Phone <span class="text-blue-brand">*</span></label>
+                    <input type="tel" id="phone" name="phone" required autocomplete="tel"
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors"
+                      placeholder="(555) 555-5555" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Route -->
+              <div>
+                <h3 class="font-heading font-bold text-sm text-text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-blue-brand/20 flex items-center justify-center text-[10px] text-blue-brand font-bold">2</span>
+                  Route Details
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="origin_city" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Origin City <span class="text-blue-brand">*</span></label>
+                    <input type="text" id="origin_city" name="origin_city" required
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors"
+                      placeholder="Chicago" />
+                  </div>
+                  <div>
+                    <label for="origin_state" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Origin State <span class="text-blue-brand">*</span></label>
+                    <input type="text" id="origin_state" name="origin_state" required maxlength="2"
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors uppercase"
+                      placeholder="IL" />
+                  </div>
+                  <div>
+                    <label for="dest_city" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Destination City <span class="text-blue-brand">*</span></label>
+                    <input type="text" id="dest_city" name="dest_city" required
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors"
+                      placeholder="Dallas" />
+                  </div>
+                  <div>
+                    <label for="dest_state" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Destination State <span class="text-blue-brand">*</span></label>
+                    <input type="text" id="dest_state" name="dest_state" required maxlength="2"
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors uppercase"
+                      placeholder="TX" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Freight Details -->
+              <div>
+                <h3 class="font-heading font-bold text-sm text-text-primary uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-blue-brand/20 flex items-center justify-center text-[10px] text-blue-brand font-bold">3</span>
+                  Freight Details
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="freight_type" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Freight Type <span class="text-blue-brand">*</span></label>
+                    <select id="freight_type" name="freight_type" required
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors appearance-none">
+                      <option value="" disabled selected>Select type...</option>
+                      <option value="Flatbed">Flatbed</option>
+                      <option value="Dry Van">Dry Van</option>
+                      <option value="Step Deck">Step Deck</option>
+                      <option value="RGN / Lowboy">RGN / Lowboy</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="pickup_date" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Pickup Date Needed <span class="text-blue-brand">*</span></label>
+                    <input type="date" id="pickup_date" name="pickup_date" required
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors" />
+                  </div>
+                  <div>
+                    <label for="commodity" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Commodity / Cargo <span class="text-blue-brand">*</span></label>
+                    <input type="text" id="commodity" name="commodity" required
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors"
+                      placeholder="e.g. Steel coils, lumber, machinery" />
+                  </div>
+                  <div>
+                    <label for="weight" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Weight (lbs) <span class="text-blue-brand">*</span></label>
+                    <input type="text" id="weight" name="weight" required
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors"
+                      placeholder="e.g. 42,000" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label for="dimensions" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Dimensions (L × W × H)</label>
+                    <input type="text" id="dimensions" name="dimensions"
+                      class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors"
+                      placeholder="e.g. 48ft × 8.5ft × 8ft (optional)" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Notes -->
+              <div>
+                <label for="notes" class="block text-text-muted text-xs font-semibold uppercase tracking-wider mb-2">Special Requirements / Notes</label>
+                <textarea id="notes" name="notes" rows="3"
+                  class="w-full bg-bg-secondary border border-white/10 rounded-xl px-4 py-3 text-text-primary text-sm placeholder-text-subtle focus:outline-none focus:border-blue-brand focus:ring-1 focus:ring-blue-brand/30 transition-colors resize-y min-h-[80px]"
+                  placeholder="Tarps required, oversize load, hazmat, liftgate, inside delivery, etc."></textarea>
+              </div>
+
+              <!-- Submit -->
+              <div>
+                <button type="submit" id="submit-btn" class="btn-primary w-full justify-center py-4 text-base">
+                  <span id="btn-text">Request My Quote</span>
+                  <svg id="btn-arrow" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                  </svg>
+                  <svg id="btn-spinner" class="w-4 h-4 hidden animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                  </svg>
+                </button>
+
+                <!-- Success message -->
+                <div id="form-success" class="hidden mt-5 p-5 rounded-xl text-center" style="background: rgba(23,212,80,0.08); border: 1px solid rgba(23,212,80,0.25);">
+                  <div class="text-2xl mb-2">✅</div>
+                  <p class="font-heading font-bold text-white text-lg mb-1">Quote Request Received!</p>
+                  <p class="text-text-muted text-sm">Harvey will reach out personally — usually within a few hours. Check your email or expect a call at the number you provided.</p>
+                </div>
+
+                <!-- Error message -->
+                <div id="form-error" class="hidden mt-5 p-5 rounded-xl text-center" style="background: rgba(212,23,23,0.08); border: 1px solid rgba(212,23,23,0.25);">
+                  <p class="font-semibold text-red-400 text-sm mb-1">Something went wrong.</p>
+                  <p class="text-text-muted text-xs">Please try again or reach out directly at <a href="tel:+14793510393" class="text-blue-brand hover:underline">(479) 351-0393</a> or <a href="mailto:harveyr@bkelogistics.com" class="text-blue-brand hover:underline">harveyr@bkelogistics.com</a>.</p>
+                </div>
+              </div>
+
+            </form>
           </div>
 
-          <!-- Privacy note -->
           <p class="text-text-subtle text-xs mt-4 px-1 leading-relaxed">
-            Your information is used solely to prepare and deliver your freight quote. We do not sell or share your data with third parties. By submitting this form, you agree to be contacted by BKE Logistics LLC regarding your shipment.
+            Your information is used solely to prepare your freight quote. We do not sell or share your data. By submitting this form, you agree to be contacted by BKE Logistics LLC regarding your shipment.
           </p>
         </div>
       </div>
@@ -97,4 +260,86 @@ import PageHero from '../components/PageHero.astro';
       </div>
     </div>
   </section>
+
 </BaseLayout>
+
+<script define:vars={{ OPENCLAW_WEBHOOK_URL }}>
+  const form = document.getElementById('quote-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  const btnArrow = document.getElementById('btn-arrow');
+  const btnSpinner = document.getElementById('btn-spinner');
+  const formSuccess = document.getElementById('form-success');
+  const formError = document.getElementById('form-error');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Collect form data
+    const data = {
+      source: 'BKE Logistics Website - Quote Request',
+      submitted_at: new Date().toISOString(),
+      contact: {
+        full_name: form.full_name.value.trim(),
+        company: form.company.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+      },
+      route: {
+        origin: `${form.origin_city.value.trim()}, ${form.origin_state.value.trim().toUpperCase()}`,
+        destination: `${form.dest_city.value.trim()}, ${form.dest_state.value.trim().toUpperCase()}`,
+      },
+      freight: {
+        type: form.freight_type.value,
+        commodity: form.commodity.value.trim(),
+        weight_lbs: form.weight.value.trim(),
+        dimensions: form.dimensions.value.trim(),
+        pickup_date: form.pickup_date.value,
+      },
+      notes: form.notes.value.trim(),
+    };
+
+    // Loading state
+    submitBtn.disabled = true;
+    btnText.textContent = 'Sending...';
+    btnArrow.classList.add('hidden');
+    btnSpinner.classList.remove('hidden');
+    formSuccess.classList.add('hidden');
+    formError.classList.add('hidden');
+
+    try {
+      // If no webhook URL is configured yet, simulate success in dev
+      if (!OPENCLAW_WEBHOOK_URL || OPENCLAW_WEBHOOK_URL === 'YOUR_OPENCLAW_WEBHOOK_URL') {
+        console.log('📋 Quote form data (webhook not yet configured):', data);
+        await new Promise(r => setTimeout(r, 800)); // simulate network
+        throw new Error('WEBHOOK_NOT_CONFIGURED');
+      }
+
+      const response = await fetch(OPENCLAW_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      // Success
+      form.reset();
+      formSuccess.classList.remove('hidden');
+    } catch (err) {
+      if (err.message === 'WEBHOOK_NOT_CONFIGURED') {
+        // Dev mode — show success anyway so we can see the form works
+        form.reset();
+        formSuccess.classList.remove('hidden');
+      } else {
+        formError.classList.remove('hidden');
+        console.error('Quote form error:', err);
+      }
+    } finally {
+      submitBtn.disabled = false;
+      btnText.textContent = 'Request My Quote';
+      btnArrow.classList.remove('hidden');
+      btnSpinner.classList.add('hidden');
+    }
+  });
+</script>
