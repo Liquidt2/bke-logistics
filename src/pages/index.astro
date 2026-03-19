@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import StatsBar from '../components/StatsBar.astro';
 import ServiceCard from '../components/ServiceCard.astro';
-import TrustBadges from '../components/TrustBadges.astro';
 import LanesMap from '../components/LanesMap.astro';
 import QuoteSection from '../components/QuoteSection.astro';
 
@@ -97,7 +96,7 @@ const industries = [
   </section>
 
   <!-- Industries Teaser -->
-  <section class="py-16 lg:py-20 bg-bg-secondary border-y border-white/5" aria-labelledby="industries-heading">
+  <section class="py-16 lg:py-20 bg-bg-secondary border-y border-white/[0.05]" aria-labelledby="industries-heading">
     <div class="max-w-7xl mx-auto px-5 lg:px-8">
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 mb-10">
         <div>
@@ -111,17 +110,14 @@ const industries = [
 
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
         {industries.map(industry => (
-          <a href="/industries" class="group bg-bg-card border border-white/5 hover:border-blue-brand/30 rounded-sm p-4 flex flex-col items-center gap-2 text-center transition-all duration-200 hover:bg-navy/20">
-            <span class="text-2xl">{industry.icon}</span>
-            <span class="text-text-muted text-xs font-medium group-hover:text-text-primary transition-colors">{industry.name}</span>
+          <a href="/industries" class="group rounded-2xl p-5 flex flex-col items-center gap-3 text-center transition-all duration-300 hover:-translate-y-1" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);" onmouseover="this.style.background='rgba(23,105,212,0.08)'; this.style.borderColor='rgba(23,105,212,0.25)';" onmouseout="this.style.background='rgba(255,255,255,0.03)'; this.style.borderColor='rgba(255,255,255,0.07)';">
+            <span class="text-3xl">{industry.icon}</span>
+            <span class="text-text-muted text-xs font-medium group-hover:text-text-primary transition-colors leading-tight">{industry.name}</span>
           </a>
         ))}
       </div>
     </div>
   </section>
-
-  <!-- Trust Badges -->
-  <TrustBadges />
 
   <!-- Lanes Map -->
   <LanesMap />
@@ -141,7 +137,7 @@ const industries = [
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {testimonials.map(t => (
-          <div class="bg-bg-card border border-white/5 hover:border-blue-brand/20 rounded-sm p-7 transition-all duration-300 hover:shadow-blue-glow group">
+          <div class="rounded-2xl p-7 transition-all duration-300 hover:-translate-y-2 group" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); box-shadow: 0 4px 24px rgba(0,0,0,0.3);">
             <!-- Stars -->
             <div class="flex gap-1 mb-5">
               {Array.from({ length: t.rating }).map(() => (
@@ -150,13 +146,13 @@ const industries = [
             </div>
 
             <!-- Quote mark -->
-            <div class="font-heading font-black text-5xl text-blue-brand/20 leading-none mb-3 -mt-2">"</div>
+            <div class="font-heading font-black text-5xl text-blue-brand/25 leading-none mb-3 -mt-2">"</div>
 
             <p class="text-text-muted text-sm leading-relaxed mb-6">
               {t.quote}
             </p>
 
-            <div class="pt-4 border-t border-white/5">
+            <div class="pt-4 border-t border-white/[0.06]">
               <div class="font-semibold text-text-primary text-sm">{t.name}</div>
               <div class="text-text-subtle text-xs mt-0.5">{t.company}</div>
             </div>

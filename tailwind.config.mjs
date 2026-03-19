@@ -19,8 +19,8 @@ export default {
         },
         bg: {
           DEFAULT: '#080D1A',
-          secondary: '#0d1525',
-          card: '#0f1d35',
+          secondary: '#0b1220',
+          card: '#0f1b30',
         },
         text: {
           primary: '#F8FAFC',
@@ -32,20 +32,18 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         heading: ['"Barlow Condensed"', 'Inter', 'system-ui', 'sans-serif'],
       },
-      backgroundImage: {
-        'stripe-pattern': `repeating-linear-gradient(
-          -45deg,
-          transparent,
-          transparent 10px,
-          rgba(23, 105, 212, 0.04) 10px,
-          rgba(23, 105, 212, 0.04) 20px
-        )`,
+      borderRadius: {
+        'ios': '16px',
+        'ios-lg': '24px',
+        'ios-xl': '32px',
       },
       boxShadow: {
-        'blue-glow': '0 0 20px rgba(23, 105, 212, 0.3)',
-        'blue-glow-lg': '0 0 40px rgba(23, 105, 212, 0.4)',
-        'card': '0 4px 24px rgba(0, 0, 0, 0.4)',
-        'card-hover': '0 8px 40px rgba(0, 0, 0, 0.6)',
+        'blue-glow': '0 4px 16px rgba(23, 105, 212, 0.45), 0 2px 4px rgba(0,0,0,0.3)',
+        'blue-glow-lg': '0 8px 28px rgba(23, 105, 212, 0.6), 0 4px 8px rgba(0,0,0,0.3)',
+        'card': '0 4px 24px rgba(0, 0, 0, 0.35)',
+        'card-hover': '0 8px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(23,105,212,0.15)',
+        'btn-3d': '0 1px 0 rgba(255,255,255,0.12) inset, 0 -1px 0 rgba(0,0,0,0.2) inset, 0 4px 16px rgba(23,105,212,0.45), 0 2px 4px rgba(0,0,0,0.3)',
+        'glass': '0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06)',
       },
       animation: {
         'fade-up': 'fadeUp 0.6s ease-out',

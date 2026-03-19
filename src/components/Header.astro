@@ -14,7 +14,7 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <div class="header-inner bg-bg/95 backdrop-blur-md border-b border-white/5">
+  <div class="header-inner backdrop-blur-xl border-b border-white/[0.06]" style="background: rgba(8,13,26,0.92);">
     <div class="max-w-7xl mx-auto px-5 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
 
@@ -59,12 +59,12 @@ const currentPath = Astro.url.pathname;
               </svg>
             </button>
             <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-              <div class="bg-bg-secondary border border-white/8 rounded-sm shadow-card min-w-[180px] overflow-hidden">
-                <a href="/freight-services" class="block px-5 py-3 text-sm text-text-muted hover:text-text-primary hover:bg-navy/30 transition-colors border-b border-white/5 font-medium">
+              <div class="rounded-2xl shadow-card min-w-[180px] overflow-hidden" style="background: rgba(11,18,32,0.98); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(20px);">
+                <a href="/freight-services" class="block px-5 py-3 text-sm text-text-muted hover:text-text-primary hover:bg-white/5 transition-colors border-b border-white/[0.06] font-medium">
                   All Services
                 </a>
                 {serviceLinks.map(link => (
-                  <a href={link.href} class="block px-5 py-3 text-sm text-text-muted hover:text-text-primary hover:bg-navy/30 transition-colors font-medium">
+                  <a href={link.href} class="block px-5 py-3 text-sm text-text-muted hover:text-text-primary hover:bg-white/5 transition-colors font-medium">
                     {link.label}
                   </a>
                 ))}
@@ -106,22 +106,23 @@ const currentPath = Astro.url.pathname;
     <!-- Mobile Menu -->
     <div
       id="mobile-menu"
-      class="lg:hidden hidden border-t border-white/5 bg-bg-secondary"
+      class="lg:hidden hidden border-t border-white/[0.06]"
+      style="background: rgba(11,18,32,0.98);"
       aria-label="Mobile navigation"
     >
       <nav class="max-w-7xl mx-auto px-5 py-5 flex flex-col gap-1">
-        <a href="/freight-services" class="block py-3 px-3 text-text-muted hover:text-text-primary hover:bg-navy/20 rounded-sm transition-colors font-medium text-sm tracking-wide">All Services</a>
+        <a href="/freight-services" class="block py-3 px-4 text-text-muted hover:text-text-primary hover:bg-white/5 rounded-xl transition-colors font-medium text-sm tracking-wide">All Services</a>
         {serviceLinks.map(link => (
-          <a href={link.href} class="block py-3 px-6 text-text-muted hover:text-text-primary hover:bg-navy/20 rounded-sm transition-colors text-sm">
+          <a href={link.href} class="block py-3 px-6 text-text-muted hover:text-text-primary hover:bg-white/5 rounded-xl transition-colors text-sm">
             → {link.label}
           </a>
         ))}
         {navLinks.map(link => (
-          <a href={link.href} class="block py-3 px-3 text-text-muted hover:text-text-primary hover:bg-navy/20 rounded-sm transition-colors font-medium text-sm tracking-wide">
+          <a href={link.href} class="block py-3 px-4 text-text-muted hover:text-text-primary hover:bg-white/5 rounded-xl transition-colors font-medium text-sm tracking-wide">
             {link.label}
           </a>
         ))}
-        <div class="pt-3 border-t border-white/5 mt-2">
+        <div class="pt-3 border-t border-white/[0.06] mt-2">
           <a href="/request-quote" class="btn-primary w-full text-center">Request a Quote</a>
         </div>
       </nav>
@@ -144,7 +145,6 @@ const currentPath = Astro.url.pathname;
       menu.classList.toggle('hidden', isOpen);
       btn.setAttribute('aria-expanded', String(!isOpen));
 
-      // Animate hamburger to X
       if (!isOpen) {
         lines[0]?.classList.add('rotate-45', 'translate-y-2');
         lines[1]?.classList.add('opacity-0');

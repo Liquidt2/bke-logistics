@@ -15,7 +15,7 @@ const { icon, title, description, href, featured = false } = Astro.props;
   class={`group card-service flex flex-col gap-5 ${featured ? 'border-blue-brand/30' : ''}`}
 >
   {icon && (
-    <div class="w-12 h-12 rounded-sm bg-navy/50 border border-navy-light/20 flex items-center justify-center text-2xl group-hover:bg-blue-brand/10 group-hover:border-blue-brand/30 transition-all duration-300">
+    <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-110" style="background: rgba(23,105,212,0.1); border: 1px solid rgba(23,105,212,0.2);">
       {icon}
     </div>
   )}
@@ -29,7 +29,7 @@ const { icon, title, description, href, featured = false } = Astro.props;
     </p>
   </div>
 
-  <div class="flex items-center gap-2 text-blue-brand text-sm font-semibold mt-auto pt-2 border-t border-white/5">
+  <div class="flex items-center gap-2 text-blue-brand text-sm font-semibold mt-auto pt-2 border-t border-white/[0.06]">
     <span>Learn More</span>
     <svg
       class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"

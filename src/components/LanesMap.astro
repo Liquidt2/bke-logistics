@@ -1,77 +1,52 @@
 ---
-const corridors = [
-  {
-    region: 'Northeast Corridor',
-    lanes: ['New York → Chicago', 'Boston → Philadelphia', 'New Jersey → Atlanta'],
-  },
-  {
-    region: 'Southeast Freight',
-    lanes: ['Atlanta → Miami', 'Charlotte → Nashville', 'Dallas → Houston'],
-  },
-  {
-    region: 'Midwest & Plains',
-    lanes: ['Chicago → Kansas City', 'Detroit → St. Louis', 'Minneapolis → Denver'],
-  },
-  {
-    region: 'Southwest & West',
-    lanes: ['Dallas → Phoenix', 'Los Angeles → Las Vegas', 'Seattle → Portland'],
-  },
-  {
-    region: 'Cross-Country',
-    lanes: ['Los Angeles → New York', 'Chicago → Los Angeles', 'Atlanta → Seattle'],
-  },
-  {
-    region: 'Industrial Heartland',
-    lanes: ['Cleveland → Pittsburgh', 'Columbus → Indianapolis', 'Louisville → Cincinnati'],
-  },
+const regions = [
+  'Northeast',
+  'Southeast',
+  'Midwest',
+  'Southwest',
+  'West Coast',
+  'Cross-Country',
 ];
 ---
 
-<section class="py-16 lg:py-24 bg-bg-secondary" aria-label="Freight lanes we serve">
+<section class="py-12 lg:py-16 bg-bg-secondary border-y border-white/[0.05]" aria-label="Coverage area">
   <div class="max-w-7xl mx-auto px-5 lg:px-8">
-    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
-      <div>
-        <span class="section-label block mb-3">Coverage</span>
-        <h2 class="font-heading font-bold text-4xl lg:text-5xl text-text-primary leading-tight">
-          Lanes We Serve
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+
+      <!-- Left: heading -->
+      <div class="shrink-0">
+        <span class="section-label block mb-2">Coverage</span>
+        <h2 class="font-heading font-bold text-3xl lg:text-4xl text-text-primary leading-tight">
+          48-State Nationwide Coverage
         </h2>
-        <p class="text-text-muted mt-3 max-w-xl text-sm leading-relaxed">
-          BKE Logistics runs regular freight lanes across the continental US. Whether you need consistent dedicated lanes or one-off shipments, we have coverage where you need it.
+        <p class="text-text-muted text-sm mt-2 max-w-sm leading-relaxed">
+          Dedicated lanes and one-off shipments across the continental US — coast to coast, border to border.
         </p>
       </div>
-      <a href="/request-quote" class="btn-primary shrink-0">
-        Check Your Lane
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-        </svg>
-      </a>
-    </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 rounded-sm overflow-hidden">
-      {corridors.map(corridor => (
-        <div class="bg-bg-card p-6 hover:bg-navy/30 transition-colors duration-200 group">
-          <div class="flex items-center gap-2 mb-4">
-            <div class="w-2 h-2 bg-blue-brand rounded-full group-hover:shadow-blue-glow transition-shadow"></div>
-            <h3 class="font-heading font-bold text-lg text-text-primary uppercase tracking-wide">
-              {corridor.region}
-            </h3>
-          </div>
-          <ul class="space-y-2">
-            {corridor.lanes.map(lane => (
-              <li class="flex items-center gap-2 text-text-muted text-sm">
-                <svg class="w-3.5 h-3.5 text-blue-brand/60 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-                {lane}
-              </li>
-            ))}
-          </ul>
+      <!-- Right: region pills + CTA -->
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-wrap gap-2">
+          {regions.map(region => (
+            <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium text-text-muted" style="background: rgba(23,105,212,0.08); border: 1px solid rgba(23,105,212,0.2);">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-brand inline-block"></span>
+              {region}
+            </span>
+          ))}
         </div>
-      ))}
-    </div>
+        <div class="flex items-center gap-3">
+          <a href="/request-quote" class="btn-primary">
+            Check Your Lane
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+          <a href="/contact" class="text-text-muted text-sm hover:text-blue-brand transition-colors">
+            Don't see your lane? Contact us →
+          </a>
+        </div>
+      </div>
 
-    <p class="text-text-subtle text-sm text-center mt-6">
-      Don't see your lane? <a href="/contact" class="text-blue-brand hover:underline">Contact our dispatch team</a> — we operate beyond these corridors.
-    </p>
+    </div>
   </div>
 </section>

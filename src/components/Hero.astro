@@ -14,32 +14,23 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative min-h-[92vh] flex items-center overflow-hidden bg-bg stripe-overlay">
-  <!-- Background layers -->
-  <div class="absolute inset-0 bg-gradient-to-br from-navy-dark/60 via-bg to-bg z-0" aria-hidden="true"></div>
+<section class="relative min-h-[92vh] flex items-center overflow-hidden bg-bg">
+  <!-- Radial glow orbs — no stripes -->
+  <div class="absolute top-[-10%] left-[-5%] w-[700px] h-[700px] rounded-full opacity-100 pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(23,105,212,0.14) 0%, transparent 65%);" aria-hidden="true"></div>
+  <div class="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(13,43,92,0.5) 0%, transparent 65%);" aria-hidden="true"></div>
+  <div class="absolute top-[30%] right-[15%] w-[350px] h-[350px] rounded-full opacity-60 pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(23,105,212,0.08) 0%, transparent 65%);" aria-hidden="true"></div>
 
-  <!-- Diagonal accent bar -->
-  <div
-    class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-b from-navy/20 to-transparent"
-    style="clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);"
-    aria-hidden="true"
-  ></div>
+  <!-- Subtle noise texture overlay -->
+  <div class="absolute inset-0 pointer-events-none opacity-[0.025]" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><circle cx=%2220%22 cy=%2220%22 r=%221%22 fill=%22white%22 opacity=%220.5%22/></svg>'); background-size: 40px 40px;" aria-hidden="true"></div>
 
-  <!-- Blue accent line -->
-  <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-blue-brand via-blue-brand/40 to-transparent" aria-hidden="true"></div>
-
-  <!-- Grid dot pattern -->
-  <div
-    class="absolute inset-0 opacity-[0.035]"
-    style="background-image: radial-gradient(circle, #1769D4 1px, transparent 1px); background-size: 36px 36px;"
-    aria-hidden="true"
-  ></div>
+  <!-- Left accent line -->
+  <div class="absolute left-0 top-0 w-[2px] h-full bg-gradient-to-b from-transparent via-blue-brand/50 to-transparent" aria-hidden="true"></div>
 
   <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 py-24 lg:py-32 w-full">
     <div class="max-w-3xl">
       <!-- Label -->
       <div class="flex items-center gap-3 mb-8 animate-fade-up">
-        <div class="w-8 h-px bg-blue-brand"></div>
+        <div class="w-8 h-px bg-blue-brand rounded-full"></div>
         <span class="section-label">FMCSA Certified · DOT Compliant · 48 States</span>
       </div>
 
@@ -68,7 +59,7 @@ const {
       </div>
 
       <!-- Quick trust indicators -->
-      <div class="flex flex-wrap items-center gap-6 mt-14 pt-10 border-t border-white/8">
+      <div class="flex flex-wrap items-center gap-6 mt-14 pt-10 border-t border-white/[0.06]">
         {[
           { icon: '✓', text: 'No Hidden Fees' },
           { icon: '✓', text: '24/7 Dispatch' },

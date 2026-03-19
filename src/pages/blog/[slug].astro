@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { sanityClient, getPostBySlug } from '../../lib/sanity';
+import { toHTML } from '@portabletext/to-html';
+
+export async function getStaticPaths() {
+  try {
+    const posts = await sanityClient.fetch(`
+      *[_type == "post"] { "slug": slug.current }
+    `);
+    return posts.map((post: any) => ({
+      params: { slug: post.slug },
+    }));
+  } catch {
+    return [];
+  }
+}
+
+const { slug } = Astro.params;
+let post: any = null;
+let bodyHtml = '';
+
+try {
+  post = await getPostBySlug(slug as string);
+  if (post?.body) {
+    bodyHtml = toHTML(post.body, {
+      components: {
+        types: {
+          image: ({ value }: any) =>
+            `<img src="${value?.asset?.url || ''}" alt="${value?.alt || ''}" class="rounded-2xl w-full my-8" loading="lazy" />`,
+        },
+      },
+    });
+  }
+} catch (e) {
+  // post stays null
+}
+
+function formatDate(dateStr: string) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+---
+
+<BaseLayout
+  title={post.title}
+  description={post.excerpt || `${post.title} — BKE Logistics LLC`}
+>
+  <article class="py-16 lg:py-24">
+    <div class="max-w-3xl mx-auto px-5 lg:px-8">
+
+      <!-- Back -->
+      <a href="/blog" class="inline-flex items-center gap-2 text-text-muted text-sm hover:text-blue-brand transition-colors mb-10">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m7-7l-7 7 7 7"/>
+        </svg>
+        Back to Blog
+      </a>
+
+      <!-- Categories -->
+      {post.categories?.length > 0 && (
+        <div class="flex flex-wrap gap-2 mb-5">
+          {post.categories.map((cat: string) => (
+            <span class="text-[11px] font-semibold uppercase tracking-wider text-blue-brand px-2.5 py-1 rounded-lg" style="background: rgba(23,105,212,0.12);">
+              {cat}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <!-- Title -->
+      <h1 class="font-heading font-black text-4xl lg:text-5xl xl:text-6xl text-text-primary leading-[1.05] mb-6">
+        {post.title}
+      </h1>
+
+      <!-- Meta -->
+      <div class="flex items-center gap-4 text-text-muted text-sm mb-10 pb-8 border-b border-white/[0.08]">
+        {post.authorName && <span class="font-medium text-text-primary">{post.authorName}</span>}
+        {post.authorName && post.publishedAt && <span class="text-white/20">·</span>}
+        {post.publishedAt && <span>{formatDate(post.publishedAt)}</span>}
+      </div>
+
+      <!-- Hero image -->
+      {post.mainImageUrl && (
+        <div class="rounded-2xl overflow-hidden mb-10">
+          <img
+            src={post.mainImageUrl}
+            alt={post.title}
+            class="w-full h-64 lg:h-80 object-cover"
+          />
+        </div>
+      )}
+
+      <!-- Body -->
+      <div class="prose-blog" set:html={bodyHtml} />
+
+      <!-- Footer CTA -->
+      <div class="mt-16 pt-10 border-t border-white/[0.08]">
+        <div class="rounded-2xl p-8 text-center" style="background: rgba(23,105,212,0.07); border: 1px solid rgba(23,105,212,0.2);">
+          <h3 class="font-heading font-bold text-2xl text-text-primary mb-2">Need a freight quote?</h3>
+          <p class="text-text-muted text-sm mb-5">BKE Logistics — flatbed and dry van specialists, 48 states, 24/7 dispatch.</p>
+          <a href="/request-quote" class="btn-primary">Request a Free Quote →</a>
+        </div>
+      </div>
+
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose-blog :global(h2) {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: #F8FAFC;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .prose-blog :global(h3) {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: #F8FAFC;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-blog :global(p) {
+    color: #94a3b8;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+  .prose-blog :global(a) {
+    color: #2d7ff0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-blog :global(ul), .prose-blog :global(ol) {
+    color: #94a3b8;
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+  }
+  .prose-blog :global(li) {
+    margin-bottom: 0.4rem;
+  }
+  .prose-blog :global(strong) {
+    color: #F8FAFC;
+    font-weight: 600;
+  }
+  .prose-blog :global(blockquote) {
+    border-left: 3px solid #1769D4;
+    padding-left: 1.25rem;
+    color: #94a3b8;
+    font-style: italic;
+    margin: 1.5rem 0;
+  }
+  .prose-blog :global(code) {
+    background: rgba(255,255,255,0.06);
+    border-radius: 6px;
+    padding: 0.15em 0.4em;
+    font-size: 0.875em;
+    color: #93c5fd;
+  }
+  .prose-blog :global(pre) {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 1.25rem;
+  }
+</style>
