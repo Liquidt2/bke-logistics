@@ -250,8 +250,7 @@ import QuoteSection from '../components/QuoteSection.astro';
 </BaseLayout>
 
 <script>
-  const WEBHOOK_URL = 'https://klaus.bkelogistics.com/hooks/agent';
-  const WEBHOOK_TOKEN = 'b31f59bd31db58608bdc6c8418b94edca02eb20af25c526ed4b1a8935f5d9c5f';
+  const WEBHOOK_URL = '/api/webhook';
   const WEBHOOK_TO = '7237377009';
 
   const form = document.getElementById('contact-form');
@@ -294,10 +293,7 @@ import QuoteSection from '../components/QuoteSection.astro';
       try {
         const response = await fetch(WEBHOOK_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${WEBHOOK_TOKEN}`,
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
 

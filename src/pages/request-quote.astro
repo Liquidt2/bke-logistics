@@ -2,9 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 
-// ─── OPENCLAW WEBHOOK ────────────────────────────────────────────────────────
-const OPENCLAW_WEBHOOK_URL = 'https://klaus.bkelogistics.com/hooks/agent';
-const OPENCLAW_TOKEN = 'b31f59bd31db58608bdc6c8418b94edca02eb20af25c526ed4b1a8935f5d9c5f';
+// ─── OPENCLAW WEBHOOK (proxied through nginx to avoid CORS) ──────────────────
+const OPENCLAW_WEBHOOK_URL = '/api/webhook';
 const OPENCLAW_TO = '7237377009';
 // ─────────────────────────────────────────────────────────────────────────────
 ---
@@ -263,7 +262,7 @@ const OPENCLAW_TO = '7237377009';
 
 </BaseLayout>
 
-<script define:vars={{ OPENCLAW_WEBHOOK_URL, OPENCLAW_TOKEN, OPENCLAW_TO }}>
+<script define:vars={{ OPENCLAW_WEBHOOK_URL, OPENCLAW_TO }}>
   const form = document.getElementById('quote-form');
   const submitBtn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
@@ -310,10 +309,7 @@ const OPENCLAW_TO = '7237377009';
     try {
       const response = await fetch(OPENCLAW_WEBHOOK_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${OPENCLAW_TOKEN}`,
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
